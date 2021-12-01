@@ -145,13 +145,13 @@ public class Board {
             {
                 int num = (int)(Math.random() * 5) + 1;
                 if(num == 1)
-                board[zrow][zcol] = new OvalPiece(Color.BLACK);
+                board[zrow][zcol] = new RedCrystal(Color.BLACK);
                 else if(num == 2)
                 board[zrow][zcol] = new TriPiece(Color.BLUE);
                 else if(num == 3)
-                board[zrow][zcol] = new DiamondPiece(Color.CYAN);
+                board[zrow][zcol] = new BlueCrystal(Color.CYAN);
                 else if(num == 4)
-                board[zrow][zcol] = new OctPiece(Color.MAGENTA);
+                board[zrow][zcol] = new GreenCrystal(Color.MAGENTA);
                 else
                 board[zrow][zcol] = new RectPiece(Color.ORANGE);
                 
