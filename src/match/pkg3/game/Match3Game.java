@@ -10,8 +10,8 @@ public class Match3Game extends JFrame implements Runnable {
     boolean animateFirstTime = true;
     Image image;
     Graphics2D g;
+    //test
     
-
     public static void main(String[] args) {
         Match3Game frame = new Match3Game();
         frame.setSize(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
