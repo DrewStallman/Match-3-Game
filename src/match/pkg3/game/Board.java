@@ -13,6 +13,37 @@ public class Board {
     private static Piece board[][] = new Piece[NUM_ROWS][NUM_COLUMNS];
     private static Highlight highlight;
     
+    public static void RemovePiece(int xpixel,int ypixel) {
+        if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
+            return;
+
+        int ydelta = Window.getHeight2()/NUM_ROWS;
+        int xdelta = Window.getWidth2()/NUM_COLUMNS;
+        int xpixelOffset = xpixel - Window.getX(0);
+        int ypixelOffset = ypixel - Window.getY(0);
+        if (xpixelOffset < 0  ||  xpixelOffset > Window.getWidth2())
+            return;
+        if (ypixelOffset < 0  ||  ypixelOffset > Window.getHeight2())
+            return;
+        int row = ypixelOffset/ydelta;
+        int column = xpixelOffset/xdelta;  
+        
+//if left clicked on a piece.      
+        if (board[row][column] != null)
+        {            
+//keep looping when not at the top && there is a piece.            
+            while (row > 0 && board[row][column] != null)
+            {
+//have the current spot point to the piece above it.                
+                board[row][column] = board[row-1][column];
+//move up a row.                
+                row--;
+            }
+//clear the spot if we are at the top.            
+            board[0][column] = null;
+        }
+    }
+    
     public static void SwapPiece(int xpixel,int ypixel) {
         
         if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
@@ -28,6 +59,7 @@ public class Board {
             return;
          row = ypixelOffset/ydelta;
          column = xpixelOffset/xdelta;
+         highlight = new Highlight(row,column);
 //        Player currentPlayer = Player.GetCurrentTurn();
        
 //        boolean isWin = CheckMatch();
@@ -139,6 +171,7 @@ public class Board {
     
     public static void Reset() {
         numPiecesAdded = 0;
+                
 //clear the board.
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
             for (int zcol=0;zcol<NUM_COLUMNS;zcol++)
@@ -151,7 +184,7 @@ public class Board {
                 board[zrow][zcol] = new GreenCrystal(Color.GREEN);
                 else if(num == 3)
                  board[zrow][zcol] = new BlueCrystal(Color.BLUE);
-            }
+            } 
 
 
         
@@ -173,7 +206,8 @@ public class Board {
 //draw grid
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
-
+         highlight.draw(g,xdelta,ydelta);
+        
         
         g.setColor(Color.black);
         for (int zi = 1;zi<NUM_ROWS;zi++)

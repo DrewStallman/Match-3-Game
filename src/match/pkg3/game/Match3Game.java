@@ -29,20 +29,20 @@ public class Match3Game extends JFrame implements Runnable {
                     if(test == 0)
                     {
                     Board.SwapPiece(e.getX(),e.getY());
-                    System.out.println("test");
+
                     test++;
                     }
                     else if(test == 1)
                     {
                     Board.SwapPiece2(e.getX(),e.getY());
                     test = 0;
-                    System.out.println("test2");
+
                     }
                     
                 }
 
                 if (e.BUTTON3 == e.getButton()) {
-                    reset();
+                    Board.RemovePiece(e.getX(),e.getY());
                 }
                 repaint();
             }
