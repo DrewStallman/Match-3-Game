@@ -143,17 +143,13 @@ public class Board {
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
             for (int zcol=0;zcol<NUM_COLUMNS;zcol++)
             {
-                int num = (int)(Math.random() * 5) + 1;
+                int num = (int)(Math.random() * 3) + 1;
                 if(num == 1)
-                board[zrow][zcol] = new OvalPiece(Color.BLACK);
+                board[zrow][zcol] = new BlueCrystal(Color.BLACK);
                 else if(num == 2)
-                board[zrow][zcol] = new TriPiece(Color.BLUE);
+                board[zrow][zcol] = new GreenCrystal(Color.BLUE);
                 else if(num == 3)
-                board[zrow][zcol] = new DiamondPiece(Color.CYAN);
-                else if(num == 4)
-                board[zrow][zcol] = new OctPiece(Color.MAGENTA);
-                else
-                board[zrow][zcol] = new RectPiece(Color.ORANGE);
+                board[zrow][zcol] = new RedCrystal(Color.CYAN);
                 
             }
 

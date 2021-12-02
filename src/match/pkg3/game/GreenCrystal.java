@@ -1,9 +1,9 @@
 
 package match.pkg3.game;
 import java.awt.*;
-public class OctPiece extends Piece {
+public class GreenCrystal extends Piece {
     
-    OctPiece(Color _color)
+    GreenCrystal(Color _color)
     {
         super(_color);
     }    
