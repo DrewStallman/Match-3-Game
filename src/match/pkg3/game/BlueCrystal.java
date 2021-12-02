@@ -1,19 +1,17 @@
 
 package match.pkg3.game;
 import java.awt.*;
+import java.awt.image.ImageObserver;
 public class BlueCrystal extends Piece {
-    
+    private static Image StaticImage;
     BlueCrystal(Color _color)
     {
         super(_color);
-    }    
+        StaticImage = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
+    }
     
     public void draw(Graphics2D g,int row,int column,int xdelta,int ydelta)
     {
-        g.setColor(getColor());
-        int xvals[] = {Window.getX(column*xdelta)+xdelta/2,Window.getX(column*xdelta)+xdelta,Window.getX(column*xdelta)+xdelta/2,Window.getX(column*xdelta)};
-        int yvals[] = {Window.getY(row*ydelta),Window.getY(row*ydelta)+ydelta/2,Window.getY(row*ydelta)+ydelta,Window.getY(row*ydelta)+ydelta/2};
-        g.fillPolygon(xvals,yvals,xvals.length);       
-    } 
-    
+        g.drawImage(StaticImage,Window.getX(column*xdelta),Window.getY(row*ydelta),xdelta,ydelta,null);
+    }
 }

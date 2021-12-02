@@ -141,7 +141,6 @@ public class Match3Game extends JFrame implements Runnable {
     public void reset() {
         Board.Reset();
         Player.Reset();
-
     }
 /////////////////////////////////////////////////////////////////////////
     public void animate() {
