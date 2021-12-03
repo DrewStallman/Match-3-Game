@@ -7,6 +7,7 @@ public class Board {
     private static int TempRow;
     private static int TempColumn;
     private static boolean PieceSwap;
+    private static Highlight signal;
     private static int numPiecesAdded = 0;
     private final static int NUM_ROWS = 6;
     private final static int NUM_COLUMNS = 12;      
@@ -110,6 +111,7 @@ public class Board {
             Temp = board[Row][Column];
             TempRow = Row;
             TempColumn = Column;
+            signal.setHighlight(Row, Column, 1);
             return;
         }
         else if (PieceSwap)
@@ -145,7 +147,7 @@ public class Board {
                     numInARow++;
                     if (numInARow == numConnected)  //if we have a win
                     {                        
-                        highlight.setHighlight(wrow, wcolumn, numInARow, Highlight.Direction.Right);                          
+                        //highlight.setHighlight(wrow, wcolumn, numInARow, Highlight.Direction.Right);                          
                         return true;
                     }
                 }
@@ -176,7 +178,7 @@ public class Board {
                     numInARow++;
                     if (numInARow == numConnected)  //if we have a win
                     {                                                 
-                        highlight.setHighlight(wrow, wcolumn, numInARow, Highlight.Direction.Down);                                                  
+                        //highlight.setHighlight(wrow, wcolumn, numInARow, Highlight.Direction.Down);                                                  
                         return true;
                     }
                 }
@@ -202,6 +204,7 @@ public class Board {
         Temp = null;
         TempRow = 0;
         TempColumn = 0;
+        signal = new Highlight();
 //clear the board.
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
             for (int zcol=0;zcol<NUM_COLUMNS;zcol++)
@@ -234,6 +237,8 @@ public class Board {
 //draw grid
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
+        
+        signal.draw(g,xdelta,ydelta);
         
         g.setColor(Color.black);
         for (int zi = 1;zi<NUM_ROWS;zi++)
