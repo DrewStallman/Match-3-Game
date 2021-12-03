@@ -28,10 +28,10 @@ public class Board {
         int row = ypixelOffset/ydelta;
         int column = xpixelOffset/xdelta;  
         
-//if left clicked on a piece.      
+//if left clicked on a piece.
         if (board[row][column] != null)
         {            
-//keep looping when not at the top && there is a piece.            
+//keep looping when not at the top && there is a piece.
             while (row > 0 && board[row][column] != null)
             {
 //have the current spot point to the piece above it.                
@@ -39,8 +39,14 @@ public class Board {
 //move up a row.                
                 row--;
             }
-//clear the spot if we are at the top.            
-            board[0][column] = null;
+            int num = (int)(Math.random() * 3) + 1;
+            if(num == 1)
+
+                board[0][column] = new RedCrystal();
+            else if(num == 2)
+                board[0][column] = new GreenCrystal();
+            else if(num == 3)
+                board[0][column] = new BlueCrystal();
         }
     }
     
