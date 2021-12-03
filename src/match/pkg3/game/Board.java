@@ -85,9 +85,7 @@ public class Board {
 //                Player.GetPlayer2().setWinner();
 //            }        
 //        }
-
-
-    }
+//    }
     public static void SwitchPieces(int xpixel,int ypixel) {
         if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
             return;
