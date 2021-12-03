@@ -27,7 +27,7 @@ public class Board {
         if (ypixelOffset < 0  ||  ypixelOffset > Window.getHeight2())
             return;
         int row = ypixelOffset/ydelta;
-        int column = xpixelOffset/xdelta;  
+        int column = xpixelOffset/xdelta;
         if (row > NUM_ROWS-1)
         {
             return;
@@ -36,7 +36,7 @@ public class Board {
         
 //if left clicked on a piece.
         if (board[row][column] != null)
-        {            
+        {
 //keep looping when not at the top && there is a piece.
             while (row > 0 && board[row][column] != null)
             {
@@ -56,37 +56,6 @@ public class Board {
         }
     }
     
-//    public static void SwapPiece(int xpixel,int ypixel) {
-//        
-//        if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
-//            return;
-//        
-//        int ydelta = Window.getHeight2()/NUM_ROWS;
-//        int xdelta = Window.getWidth2()/NUM_COLUMNS;
-//        int xpixelOffset = xpixel - Window.getX(0);
-//        int ypixelOffset = ypixel - Window.getY(0);
-//        if (xpixelOffset < 0  ||  xpixelOffset > Window.getWidth2())
-//            return;
-//        if (ypixelOffset < 0  ||  ypixelOffset > Window.getHeight2())
-//            return;
-//        //row = ypixelOffset/ydelta;
-//        //column = xpixelOffset/xdelta;
-//
-//        Player currentPlayer = Player.GetCurrentTurn();
-//       
-//        boolean isWin = CheckMatch();
-//        if (isWin)
-//            currentPlayer.setWinner();
-//        else {
-//            Player.SwitchTurn();
-//            numPiecesAdded++;
-//            if (numPiecesAdded == NUM_ROWS * NUM_COLUMNS)
-//            {
-//               Player.GetPlayer1().setWinner();
-//                Player.GetPlayer2().setWinner();
-//            }        
-//        }
-//    }
     public static void SwitchPieces(int xpixel,int ypixel) {
         if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
             return;
@@ -102,9 +71,6 @@ public class Board {
         int Row = ypixelOffset/ydelta;
         int Column = xpixelOffset/xdelta;
         
-//        Temp = board[Row][Column];
-//        TempRow = Row;
-//        TempColumn = Column;
         if (!PieceSwap)
         {
             PieceSwap = true;
@@ -124,12 +90,12 @@ public class Board {
         }
         signal = new Highlight();
         PieceSwap = false;
+        CheckMatch();
     }
 
-    private static boolean CheckMatch()
+    private static void CheckMatch()
     {
-        final int numConnected = 3;
-        int numInARow = 0;      
+        int numInARow = 0;
         int wrow = 0;
         int wcolumn = 0;
         Color currentColor = null;
@@ -146,10 +112,13 @@ public class Board {
 //the current location matches the current color                
                 else if (board[zrow][zcol].getColor() == currentColor) { 
                     numInARow++;
-                    if (numInARow == numConnected)  //if we have a win
-                    {                        
-                        //highlight.setHighlight(wrow, wcolumn, numInARow, Highlight.Direction.Right);                          
-                        return true;
+                    if (numInARow >= 3)  //if we have a win
+                    {
+                        for ()
+                        {
+                            
+                        }
+                        return;
                     }
                 }
                 else {  //the current location has a different color
@@ -159,7 +128,7 @@ public class Board {
                     currentColor = board[zrow][zcol].getColor();
                 }
             }
-            numInARow = 0;    //starting a new row.
+            numInARow = 0;
             currentColor = null;
         }
 //vertical win
@@ -174,13 +143,12 @@ public class Board {
                     numInARow = 0;
                     currentColor = null;
                 }
-//the current location matches the current color                
+//the current location matches the current color
                 else if (board[zrow][zcol].getColor() == currentColor) { 
                     numInARow++;
-                    if (numInARow == numConnected)  //if we have a win
-                    {                                                 
-                        //highlight.setHighlight(wrow, wcolumn, numInARow, Highlight.Direction.Down);                                                  
-                        return true;
+                    if (numInARow >= 3)  //if we have a win
+                    {
+                        return;
                     }
                 }
                 else {  //the current location has a different color
@@ -194,8 +162,7 @@ public class Board {
             currentColor = null;
         }
         
-        
-        return false;
+        return;
     }
     
     
@@ -208,30 +175,18 @@ public class Board {
         signal = new Highlight();
 //clear the board.
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
+        {
             for (int zcol=0;zcol<NUM_COLUMNS;zcol++)
             {
                 int num = (int)(Math.random() * 3) + 1;
                 if(num == 1)
-               
-                board[zrow][zcol] = new RedCrystal();
+                    board[zrow][zcol] = new RedCrystal();
                 else if(num == 2)
-                board[zrow][zcol] = new GreenCrystal();
+                    board[zrow][zcol] = new GreenCrystal();
                 else if(num == 3)
-                 board[zrow][zcol] = new BlueCrystal();
+                    board[zrow][zcol] = new BlueCrystal();
             }
-        
-
- //       highlight = new Highlight();
-        
-          //highlight = new Highlight(4, 1, 1, Highlight.Direction.Right);
-
-        
-        
-//row, col, num, direction
-//        highlight = new Highlight(2, 3, 4, Highlight.Direction.Right);
-        
-                             //row, col, num, direction
-//        highlight.setHighlight(2, 3, 4, Highlight.Direction.Right);        
+        }
     }
     
     public static void Draw(Graphics2D g) {

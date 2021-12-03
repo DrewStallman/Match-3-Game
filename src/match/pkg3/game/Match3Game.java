@@ -25,24 +25,12 @@ public class Match3Game extends JFrame implements Runnable {
             public void mousePressed(MouseEvent e) {
                 
                 if (e.BUTTON1 == e.getButton() ) {
-                    
-//                    if(test == 0)
-//                    {
-//                        Board.SwapPiece(e.getX(),e.getY());
-//
-//                        test++;
-//                    }
-//                    else if(test == 1)
-//                    {
-//                        
-//                        test = 0;
-//                    }
                     Board.SwitchPieces(e.getX(),e.getY());
                     
                 }
 
                 if (e.BUTTON3 == e.getButton()) {
-                    Board.RemovePiece(e.getX(),e.getY());
+                    //Board.RemovePiece(e.getX(),e.getY());
                 }
                 repaint();
             }
