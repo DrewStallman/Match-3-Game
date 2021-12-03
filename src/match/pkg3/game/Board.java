@@ -3,10 +3,10 @@ package match.pkg3.game;
 import java.awt.*;
 
 public class Board {
-    static int row2;
-    static int column2;
-    static int row;
-    static int column;
+    private static Piece Temp;
+    private static int TempRow;
+    private static int TempColumn;
+    private static boolean PieceSwap;
     private static int numPiecesAdded = 0;
     private final static int NUM_ROWS = 6;
     private final static int NUM_COLUMNS = 12;      
@@ -55,41 +55,40 @@ public class Board {
         }
     }
     
-    public static void SwapPiece(int xpixel,int ypixel) {
-        
-        if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
-            return;
-        
-        int ydelta = Window.getHeight2()/NUM_ROWS;
-        int xdelta = Window.getWidth2()/NUM_COLUMNS;
-        int xpixelOffset = xpixel - Window.getX(0);
-        int ypixelOffset = ypixel - Window.getY(0);
-        if (xpixelOffset < 0  ||  xpixelOffset > Window.getWidth2())
-            return;
-        if (ypixelOffset < 0  ||  ypixelOffset > Window.getHeight2())
-            return;
-         row = ypixelOffset/ydelta;
-         column = xpixelOffset/xdelta;
-
+//    public static void SwapPiece(int xpixel,int ypixel) {
+//        
+//        if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
+//            return;
+//        
+//        int ydelta = Window.getHeight2()/NUM_ROWS;
+//        int xdelta = Window.getWidth2()/NUM_COLUMNS;
+//        int xpixelOffset = xpixel - Window.getX(0);
+//        int ypixelOffset = ypixel - Window.getY(0);
+//        if (xpixelOffset < 0  ||  xpixelOffset > Window.getWidth2())
+//            return;
+//        if (ypixelOffset < 0  ||  ypixelOffset > Window.getHeight2())
+//            return;
+//        //row = ypixelOffset/ydelta;
+//        //column = xpixelOffset/xdelta;
+//
 //        Player currentPlayer = Player.GetCurrentTurn();
-       
+//       
 //        boolean isWin = CheckMatch();
 //        if (isWin)
 //            currentPlayer.setWinner();
 //        else {
-            Player.SwitchTurn();
+//            Player.SwitchTurn();
 //            numPiecesAdded++;
 //            if (numPiecesAdded == NUM_ROWS * NUM_COLUMNS)
 //            {
-//                Player.GetPlayer1().setWinner();
+//               Player.GetPlayer1().setWinner();
 //                Player.GetPlayer2().setWinner();
 //            }        
 //        }
 
 
     }
-    public static void SwapPiece2(int xpixel,int ypixel) {
-        
+    public static void SwitchPieces(int xpixel,int ypixel) {
         if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
             return;
         
@@ -101,7 +100,29 @@ public class Board {
             return;
         if (ypixelOffset < 0  ||  ypixelOffset > Window.getHeight2())
             return;
+        int Row = ypixelOffset/ydelta;
+        int Column = xpixelOffset/xdelta;
         
+//        Temp = board[Row][Column];
+//        TempRow = Row;
+//        TempColumn = Column;
+        if (!PieceSwap)
+        {
+            PieceSwap = true;
+            Temp = board[Row][Column];
+            TempRow = Row;
+            TempColumn = Column;
+            return;
+        }
+        else if (PieceSwap)
+        {
+            if ((Row==TempRow+1 && Column==TempColumn) || (Row==TempRow-1 && Column==TempColumn) || (Row==TempRow && Column==TempColumn-1) || (Row==TempRow && Column==TempColumn+1))
+            {
+                board[TempRow][TempColumn] = board[Row][Column];
+                board[Row][Column] = Temp;
+            }
+        }
+        PieceSwap = false;
     }
 
     private static boolean CheckMatch()
@@ -179,7 +200,10 @@ public class Board {
     
     public static void Reset() {
         numPiecesAdded = 0;
-                
+        PieceSwap = false;
+        Temp = null;
+        TempRow = 0;
+        TempColumn = 0;
 //clear the board.
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
             for (int zcol=0;zcol<NUM_COLUMNS;zcol++)
@@ -197,7 +221,7 @@ public class Board {
 
  //       highlight = new Highlight();
         
-          highlight = new Highlight(4, 1, 1, Highlight.Direction.Right);
+          //highlight = new Highlight(4, 1, 1, Highlight.Direction.Right);
 
         
         
