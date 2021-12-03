@@ -3,9 +3,9 @@ import java.awt.*;
 
 public abstract class Piece {
     private Color color;
-    Piece(Color _color)
+    Piece()
     {
-        color = _color;
+        
     }
     public Color getColor()
     {
