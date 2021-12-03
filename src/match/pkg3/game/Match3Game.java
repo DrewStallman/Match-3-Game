@@ -38,6 +38,7 @@ public class Match3Game extends JFrame implements Runnable {
 //                        test = 0;
 //                    }
                     Board.SwitchPieces(e.getX(),e.getY());
+                    
                 }
 
                 if (e.BUTTON3 == e.getButton()) {
