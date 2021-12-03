@@ -27,6 +27,11 @@ public class Board {
             return;
         int row = ypixelOffset/ydelta;
         int column = xpixelOffset/xdelta;  
+        if (row > NUM_ROWS-1)
+        {
+            return;
+        }
+        
         
 //if left clicked on a piece.
         if (board[row][column] != null)
@@ -36,7 +41,7 @@ public class Board {
             {
 //have the current spot point to the piece above it.                
                 board[row][column] = board[row-1][column];
-//move up a row.                
+//move up a row.
                 row--;
             }
             int num = (int)(Math.random() * 3) + 1;
@@ -96,9 +101,7 @@ public class Board {
             return;
         if (ypixelOffset < 0  ||  ypixelOffset > Window.getHeight2())
             return;
-         row2 = ypixelOffset/ydelta;
-         column2 = xpixelOffset/xdelta;
-         board[row2][column2] = board[row][column];
+        
     }
 
     private static boolean CheckMatch()
@@ -189,14 +192,12 @@ public class Board {
                 board[zrow][zcol] = new GreenCrystal();
                 else if(num == 3)
                  board[zrow][zcol] = new BlueCrystal();
-            } 
-
-
+            }
         
 
  //       highlight = new Highlight();
         
-    //    highlight = new Highlight(4, 1);
+          highlight = new Highlight(4, 1, 1, Highlight.Direction.Right);
 
         
         
