@@ -4,9 +4,8 @@ import java.awt.*;
 import java.awt.image.ImageObserver;
 public class BlueCrystal extends Piece {
     private static Image StaticImage;
-    BlueCrystal(Color _color)
+    BlueCrystal()
     {
-        super(_color);
         StaticImage = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
     }
     

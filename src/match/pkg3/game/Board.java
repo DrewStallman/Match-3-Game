@@ -179,11 +179,11 @@ public class Board {
                 int num = (int)(Math.random() * 3) + 1;
                 if(num == 1)
                
-                board[zrow][zcol] = new RedCrystal(Color.orange);
+                board[zrow][zcol] = new RedCrystal();
                 else if(num == 2)
-                board[zrow][zcol] = new GreenCrystal(Color.GREEN);
+                board[zrow][zcol] = new GreenCrystal();
                 else if(num == 3)
-                 board[zrow][zcol] = new BlueCrystal(Color.BLUE);
+                 board[zrow][zcol] = new BlueCrystal();
             } 
 
 
@@ -206,7 +206,7 @@ public class Board {
 //draw grid
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
-         highlight.draw(g,xdelta,ydelta);
+        //highlight.draw(g,xdelta,ydelta);
         
         
         g.setColor(Color.black);
