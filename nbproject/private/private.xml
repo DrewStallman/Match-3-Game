@@ -5,11 +5,10 @@
         <group>
             <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/Highlight.java</file>
             <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/Window.java</file>
-            <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/TriPiece.java</file>
             <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/Piece.java</file>
-            <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/DiamondPiece.java</file>
-            <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/OctPiece.java</file>
-            <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/OvalPiece.java</file>
+            <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/RedCrystal.java</file>
+            <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/BlueCrystal.java</file>
+            <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/GreenCrystal.java</file>
             <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/Player.java</file>
             <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/Match3Game.java</file>
             <file>file:/C:/Users/373001768/Documents/NetBeansProjects/Match-3-Game/src/match/pkg3/game/Board.java</file>

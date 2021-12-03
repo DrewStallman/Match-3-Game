@@ -59,7 +59,7 @@ public class Board {
             return;
          row = ypixelOffset/ydelta;
          column = xpixelOffset/xdelta;
-         highlight = new Highlight(row,column);
+
 //        Player currentPlayer = Player.GetCurrentTurn();
        
 //        boolean isWin = CheckMatch();
@@ -93,7 +93,6 @@ public class Board {
          row2 = ypixelOffset/ydelta;
          column2 = xpixelOffset/xdelta;
          board[row2][column2] = board[row][column];
-         
     }
 
     private static boolean CheckMatch()
@@ -206,8 +205,7 @@ public class Board {
 //draw grid
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
-         highlight.draw(g,xdelta,ydelta);
-        
+   
         
         g.setColor(Color.black);
         for (int zi = 1;zi<NUM_ROWS;zi++)
