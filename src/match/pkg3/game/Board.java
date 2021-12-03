@@ -122,6 +122,7 @@ public class Board {
                 board[Row][Column] = Temp;
             }
         }
+        signal = new Highlight();
         PieceSwap = false;
     }
 
