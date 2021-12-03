@@ -205,12 +205,10 @@ public class Board {
 //draw grid
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
-<<<<<<< HEAD
-   
-=======
+
         //highlight.draw(g,xdelta,ydelta);
         
->>>>>>> 08643cf4ea7ff471ed2ae67466e2c49c380571a7
+
         
         g.setColor(Color.black);
         for (int zi = 1;zi<NUM_ROWS;zi++)
