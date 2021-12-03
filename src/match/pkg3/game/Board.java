@@ -85,8 +85,6 @@ public class Board {
 //                Player.GetPlayer2().setWinner();
 //            }        
 //        }
-
-
 //    }
     public static void SwitchPieces(int xpixel,int ypixel) {
         if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
@@ -103,9 +101,9 @@ public class Board {
         int Row = ypixelOffset/ydelta;
         int Column = xpixelOffset/xdelta;
         
-        Temp = board[Row][Column];
-        TempRow = Row;
-        TempColumn = Column;
+//        Temp = board[Row][Column];
+//        TempRow = Row;
+//        TempColumn = Column;
         if (!PieceSwap)
         {
             PieceSwap = true;
