@@ -11,6 +11,8 @@ public class Match3Game extends JFrame implements Runnable {
     Image image;
     Graphics2D g;
     
+    Image BackgroundImage;
+    
     public static void main(String[] args) {
         Match3Game frame = new Match3Game();
         frame.setSize(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
@@ -86,9 +88,9 @@ public class Match3Game extends JFrame implements Runnable {
                     RenderingHints.VALUE_ANTIALIAS_ON);
         }
 //fill background
-        
-        g.setColor(Color.red);
-        g.fillRect(0, 0, Window.xsize, Window.ysize);
+        g.drawImage(BackgroundImage,0, 0, Window.xsize, Window.ysize,this);
+//        g.setColor(Color.red);
+//        g.fillRect(0, 0, Window.xsize, Window.ysize);
 
         int x[] = {Window.getX(0), Window.getX(Window.getWidth2()), Window.getX(Window.getWidth2()), Window.getX(0), Window.getX(0)};
         int y[] = {Window.getY(0), Window.getY(0), Window.getY(Window.getHeight2()), Window.getY(Window.getHeight2()), Window.getY(0)};
@@ -106,6 +108,7 @@ public class Match3Game extends JFrame implements Runnable {
         
               
         Board.Draw(g);
+        
 
         gOld.drawImage(image, 0, 0, null);
     }
@@ -139,7 +142,7 @@ public class Match3Game extends JFrame implements Runnable {
                 Window.xsize = getSize().width;
                 Window.ysize = getSize().height;
             }
-
+            BackgroundImage = Toolkit.getDefaultToolkit().getImage("./CaveBackground.PNG");
             reset();
 
         }
