@@ -98,14 +98,23 @@ public class Match3Game extends JFrame implements Runnable {
         g.setColor(Color.white);
         g.fillPolygon(x, y, 4);
 // draw border
-        g.setColor(Color.red);
+        g.setColor(Color.black);
         g.drawPolyline(x, y, 5);
 
         if (animateFirstTime) {
             gOld.drawImage(image, 0, 0, null);
             return;
         }
-        
+        g.setColor(Color.DARK_GRAY);
+        g.fillRect(0,25,275,65);
+            g.setColor(Color.white);
+            g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
+            g.drawString("Health:", 20, 75);
+            g.setColor(Color.DARK_GRAY);
+        g.fillRect(1350,25,275,65);
+            g.setColor(Color.white);
+            g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
+            g.drawString("Health", 1425, 75);
               
         Board.Draw(g);
         
