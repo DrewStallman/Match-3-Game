@@ -14,20 +14,16 @@ public class Board {
     private static Piece board[][] = new Piece[NUM_ROWS][NUM_COLUMNS];
     private static Highlight highlight;
     
-    public static void RemovePiece(int xpixel,int ypixel) {
+    public static void RemovePiece(int column,int row) {
         if (Player.GetPlayer1().isWinner() || Player.GetPlayer2().isWinner())
             return;
 
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
-        int xpixelOffset = xpixel - Window.getX(0);
-        int ypixelOffset = ypixel - Window.getY(0);
-        if (xpixelOffset < 0  ||  xpixelOffset > Window.getWidth2())
+        if (column < 0  ||  column > Window.getWidth2())
             return;
-        if (ypixelOffset < 0  ||  ypixelOffset > Window.getHeight2())
+        if (row < 0  ||  row > Window.getHeight2())
             return;
-        int row = ypixelOffset/ydelta;
-        int column = xpixelOffset/xdelta;
         if (row > NUM_ROWS-1)
         {
             return;
@@ -48,11 +44,11 @@ public class Board {
             int num = (int)(Math.random() * 3) + 1;
             if(num == 1)
 
-                board[0][column] = new RedCrystal();
+                board[0][column] = new RedCrystal(Piece.CrystalType.Red);
             else if(num == 2)
-                board[0][column] = new GreenCrystal();
+                board[0][column] = new GreenCrystal(Piece.CrystalType.Green);
             else if(num == 3)
-                board[0][column] = new BlueCrystal();
+                board[0][column] = new BlueCrystal(Piece.CrystalType.Blue);
         }
     }
     
@@ -98,7 +94,7 @@ public class Board {
         int numInARow = 0;
         int wrow = 0;
         int wcolumn = 0;
-        Color currentColor = null;
+        Piece.CrystalType currentType = null;
 //horizontal win        
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
         {
@@ -107,17 +103,14 @@ public class Board {
 //the current location is null                
                 if (board[zrow][zcol] == null) { 
                     numInARow = 0;
-                    currentColor = null;
+                    currentType = null;
                 }
 //the current location matches the current color                
-                else if (board[zrow][zcol].getColor() == currentColor) { 
+                else if (board[zrow][zcol].getType() == currentType) 
+                { 
                     numInARow++;
                     if (numInARow >= 3)  //if we have a win
                     {
-                        for ()
-                        {
-                            
-                        }
                         return;
                     }
                 }
@@ -125,15 +118,15 @@ public class Board {
                     numInARow = 1;
                     wrow = zrow;
                     wcolumn = zcol;
-                    currentColor = board[zrow][zcol].getColor();
+                    currentType = board[zrow][zcol].getType();
                 }
             }
             numInARow = 0;
-            currentColor = null;
+            currentType = null;
         }
 //vertical win
         numInARow = 0;        
-        currentColor = null;
+        currentType = null;
         for (int zcol=0;zcol<NUM_COLUMNS;zcol++)
         {
             for (int zrow=0;zrow<NUM_ROWS;zrow++)
@@ -141,10 +134,10 @@ public class Board {
 //the current location is null                
                 if (board[zrow][zcol] == null) { 
                     numInARow = 0;
-                    currentColor = null;
+                    currentType = null;
                 }
 //the current location matches the current color
-                else if (board[zrow][zcol].getColor() == currentColor) { 
+                else if (board[zrow][zcol].getType() == currentType) { 
                     numInARow++;
                     if (numInARow >= 3)  //if we have a win
                     {
@@ -155,11 +148,11 @@ public class Board {
                     numInARow = 1;
                     wrow = zrow;
                     wcolumn = zcol;
-                    currentColor = board[zrow][zcol].getColor();
+                    currentType = board[zrow][zcol].getType();
                 }
             }
             numInARow = 0;    //starting a new column.
-            currentColor = null;
+            currentType = null;
         }
         
         return;
@@ -180,11 +173,11 @@ public class Board {
             {
                 int num = (int)(Math.random() * 3) + 1;
                 if(num == 1)
-                    board[zrow][zcol] = new RedCrystal();
+                    board[zrow][zcol] = new RedCrystal(Piece.CrystalType.Red);
                 else if(num == 2)
-                    board[zrow][zcol] = new GreenCrystal();
+                    board[zrow][zcol] = new GreenCrystal(Piece.CrystalType.Green);
                 else if(num == 3)
-                    board[zrow][zcol] = new BlueCrystal();
+                    board[zrow][zcol] = new BlueCrystal(Piece.CrystalType.Blue);
             }
         }
     }

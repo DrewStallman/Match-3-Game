@@ -3,8 +3,9 @@ import java.awt.*;
 
 public class RedCrystal extends Piece {
     private static Image StaticImage;
-    RedCrystal()
+    RedCrystal(CrystalType _type)
     {
+        super(_type);
         StaticImage = Toolkit.getDefaultToolkit().getImage("./Red Crystal.PNG");
     }    
     

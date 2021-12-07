@@ -2,14 +2,18 @@ package match.pkg3.game;
 import java.awt.*;
 
 public abstract class Piece {
-    private Color color;
-    Piece()
+    public static enum CrystalType
     {
-        
+        Blue,Green,Red;
+    };
+    private CrystalType type;
+    Piece(CrystalType _type)
+    {
+        type = _type;
     }
-    public Color getColor()
+    public CrystalType getType()
     {
-        return (color);
+        return type;
     }
 
     public abstract void draw(Graphics2D g,int row,int column,int xdelta,int ydelta);

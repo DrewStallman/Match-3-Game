@@ -3,8 +3,9 @@ package match.pkg3.game;
 import java.awt.*;
 public class GreenCrystal extends Piece {
     private static Image StaticImage;
-    GreenCrystal()
+    GreenCrystal(CrystalType _type)
     {
+        super(_type);
         StaticImage = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
     }    
     
