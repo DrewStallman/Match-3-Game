@@ -14,7 +14,8 @@ public class Match3Game extends JFrame implements Runnable {
     Image BackgroundImage;
     Image HealthBar1;
     Image HealthBar2;
-    
+    Image HealthBar1P2;
+    Image HealthBar2P2;
     public static void main(String[] args) {
         Match3Game frame = new Match3Game();
         frame.setSize(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
@@ -108,7 +109,9 @@ public class Match3Game extends JFrame implements Runnable {
             return;
         }
                    g.drawImage(HealthBar1,1066, 30, Window.xsize/3, Window.ysize/13,this);
-        g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this); 
+        g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this);
+        g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
+        g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this); 
 
               
         Board.Draw(g);
@@ -149,6 +152,8 @@ public class Match3Game extends JFrame implements Runnable {
             BackgroundImage = Toolkit.getDefaultToolkit().getImage("./CaveBackground.PNG");
             HealthBar1 = Toolkit.getDefaultToolkit().getImage("./Healthbar1.PNG");
             HealthBar2 = Toolkit.getDefaultToolkit().getImage("./Healthbar2.PNG");
+            HealthBar1P2 = Toolkit.getDefaultToolkit().getImage("./Healthbar1P2.PNG");
+            HealthBar2P2 = Toolkit.getDefaultToolkit().getImage("./Healthbar2P2.PNG");
             reset();
 
         }
