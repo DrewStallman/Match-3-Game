@@ -12,6 +12,8 @@ public class Match3Game extends JFrame implements Runnable {
     Graphics2D g;
     
     Image BackgroundImage;
+    Image HealthBar1;
+    Image HealthBar2;
     
     public static void main(String[] args) {
         Match3Game frame = new Match3Game();
@@ -105,16 +107,9 @@ public class Match3Game extends JFrame implements Runnable {
             gOld.drawImage(image, 0, 0, null);
             return;
         }
-        g.setColor(Color.DARK_GRAY);
-        g.fillRect(0,25,275,65);
-            g.setColor(Color.white);
-            g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
-            g.drawString("Health:", 20, 75);
-            g.setColor(Color.DARK_GRAY);
-        g.fillRect(1350,25,275,65);
-            g.setColor(Color.white);
-            g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
-            g.drawString("Health", 1425, 75);
+                   g.drawImage(HealthBar1,1066, 30, Window.xsize/3, Window.ysize/13,this);
+        g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this); 
+
               
         Board.Draw(g);
         
@@ -152,6 +147,8 @@ public class Match3Game extends JFrame implements Runnable {
                 Window.ysize = getSize().height;
             }
             BackgroundImage = Toolkit.getDefaultToolkit().getImage("./CaveBackground.PNG");
+            HealthBar1 = Toolkit.getDefaultToolkit().getImage("./Healthbar1.PNG");
+            HealthBar2 = Toolkit.getDefaultToolkit().getImage("./Healthbar2.PNG");
             reset();
 
         }
