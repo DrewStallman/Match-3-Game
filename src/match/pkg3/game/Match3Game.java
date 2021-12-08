@@ -108,8 +108,11 @@ public class Match3Game extends JFrame implements Runnable {
             gOld.drawImage(image, 0, 0, null);
             return;
         }
+        
                    g.drawImage(HealthBar1,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this);
+        g.setColor(Color.green);
+        g.fillRect(0, 0, Window.xsize/20, Window.ysize/9-5);
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this); 
 
