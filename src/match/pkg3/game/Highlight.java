@@ -18,9 +18,6 @@ public class Highlight {
         column = _column;
         isHighlight = true;
     }
-     
-    
-    
     
     
     public Highlight(int _row,int _column,int _numBoxes)

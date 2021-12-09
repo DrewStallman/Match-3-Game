@@ -17,6 +17,7 @@ public class Match3Game extends JFrame implements Runnable {
     Image HealthBar1P2;
     Image HealthBar2P2;
     Image MiddlePiece;
+    Image PlayerBar;
     public static void main(String[] args) {
         Match3Game frame = new Match3Game();
         frame.setSize(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
@@ -113,6 +114,11 @@ public class Match3Game extends JFrame implements Runnable {
                 int health2 = 100;
                 int damage1 = 0;
                 int damage2 = 0;
+                int playerTurn;
+                if(Player.GetCurrentTurn() == Player.GetPlayer1())
+                    playerTurn = 1;
+                else
+                    playerTurn = 2;
                    g.drawImage(HealthBar1,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this);
         g.setColor(Color.green);
@@ -125,6 +131,11 @@ public class Match3Game extends JFrame implements Runnable {
         g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
         g.drawString(health2 + "%", 1300, 80);
         g.drawImage(MiddlePiece,387, 20, 825, 80,this);
+        g.drawImage(PlayerBar,610, 30, 400, 140,this);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 55));
+        g.drawString("Player", 720, 151);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 55));
+        g.drawString("" + playerTurn, 790, 80);
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this); 
 
@@ -170,6 +181,7 @@ public class Match3Game extends JFrame implements Runnable {
             HealthBar1P2 = Toolkit.getDefaultToolkit().getImage("./Healthbar1P2.PNG");
             HealthBar2P2 = Toolkit.getDefaultToolkit().getImage("./Healthbar2P2.PNG");
             MiddlePiece = Toolkit.getDefaultToolkit().getImage("./MiddlePiece.PNG");
+            PlayerBar = Toolkit.getDefaultToolkit().getImage("./PlayerTurn.PNG");
             reset();
 
         }
