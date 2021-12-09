@@ -119,10 +119,10 @@ public class Match3Game extends JFrame implements Runnable {
         g.fillRect(0, 0, 510 - damage1, Window.ysize/9-5);
         g.setColor(Color.green);
         g.fillRect(1080 + damage2, 0, 510, Window.ysize/9-5);
-        g.setColor(Color.white);
-        g.setFont (new Font ("Arial",Font.PLAIN, 50));
+        g.setColor(Color.BLACK);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
         g.drawString(health1 + "%", 100, 80);
-        g.setFont (new Font ("Arial",Font.PLAIN, 50));
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
         g.drawString(health2 + "%", 1300, 80);
         g.drawImage(MiddlePiece,387, 20, 825, 80,this);
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
