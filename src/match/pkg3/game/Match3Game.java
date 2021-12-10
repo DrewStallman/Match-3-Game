@@ -114,7 +114,13 @@ public class Match3Game extends JFrame implements Runnable {
                 int health2 = 100;
                 int damage1 = 0;
                 int damage2 = 0;
+                int damageAdd1 = 0;
+                int damageAdd2 = 0;
                 int playerTurn;
+                health1 -= damage1;
+                health2 -= damage2;
+                damageAdd1 = damage1*5;
+                damageAdd2 = damage2*5;
                 if(Player.GetCurrentTurn() == Player.GetPlayer1())
                     playerTurn = 1;
                 else
@@ -122,9 +128,9 @@ public class Match3Game extends JFrame implements Runnable {
                    g.drawImage(HealthBar1,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this);
         g.setColor(Color.green);
-        g.fillRect(0, 0, 510 - damage1, Window.ysize/9-5);
+        g.fillRect(0, 0, 511 - damageAdd1, Window.ysize/9-5);
         g.setColor(Color.green);
-        g.fillRect(1080 + damage2, 0, 510, Window.ysize/9-5);
+        g.fillRect(1088 + damageAdd2, 0, 510, Window.ysize/9-5);
         g.setColor(Color.BLACK);
         g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
         g.drawString(health1 + "%", 100, 80);
