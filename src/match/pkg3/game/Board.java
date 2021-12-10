@@ -36,6 +36,8 @@ public class Board
         }
     }
     
+    public static Piece RanPiece(int zrow,int zcol)
+    {
         Piece returnPiece = null;
         
         int num = (int)(Math.random() * 3) + 1;
