@@ -18,6 +18,7 @@ public class Match3Game extends JFrame implements Runnable {
     Image HealthBar2P2;
     Image MiddlePiece;
     Image PlayerBar;
+    Image BoardOutline;
     public static void main(String[] args) {
         Match3Game frame = new Match3Game();
         frame.setSize(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
@@ -135,17 +136,18 @@ public class Match3Game extends JFrame implements Runnable {
         g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
         g.drawString(health1 + "%", 100, 80);
         g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
-        g.drawString(health2 + "%", 1300, 80);
+        g.drawString(health2 + "%", 1350, 80);
         g.drawImage(MiddlePiece,387, 20, 825, 80,this);
-        g.drawImage(PlayerBar,610, 30, 400, 140,this);
+        g.drawImage(PlayerBar,685, 170, 240, -140,this);
         g.setFont (new Font ("Arial",Font.TYPE1_FONT, 55));
-        g.drawString("Player", 720, 151);
-        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 55));
-        g.drawString("" + playerTurn, 790, 80);
+        g.drawString("Player", 720, 77);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 75));
+        g.drawString("" + playerTurn, 780, 161);
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
-        g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this); 
-
+        g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this);
+        g.drawImage(BoardOutline,282, 400, 1039, 500,this);
               
+        
         Board.Draw(g);
         
 
@@ -181,13 +183,14 @@ public class Match3Game extends JFrame implements Runnable {
                 Window.xsize = getSize().width;
                 Window.ysize = getSize().height;
             }
-            BackgroundImage = Toolkit.getDefaultToolkit().getImage("./CaveBackground.PNG");
+            BackgroundImage = Toolkit.getDefaultToolkit().getImage("./Cave.PNG");
             HealthBar1 = Toolkit.getDefaultToolkit().getImage("./Healthbar1.PNG");
             HealthBar2 = Toolkit.getDefaultToolkit().getImage("./Healthbar2.PNG");
             HealthBar1P2 = Toolkit.getDefaultToolkit().getImage("./Healthbar1P2.PNG");
             HealthBar2P2 = Toolkit.getDefaultToolkit().getImage("./Healthbar2P2.PNG");
             MiddlePiece = Toolkit.getDefaultToolkit().getImage("./MiddlePiece.PNG");
             PlayerBar = Toolkit.getDefaultToolkit().getImage("./PlayerTurn.PNG");
+            BoardOutline = Toolkit.getDefaultToolkit().getImage("./BoardOutline.PNG");
             reset();
 
         }
