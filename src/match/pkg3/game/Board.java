@@ -59,6 +59,7 @@ public class Board
             return;
         int Row = ypixelOffset/ydelta;
         int Column = xpixelOffset/xdelta;
+        if (board[Row][Column] != null)
         
         if (!PieceSwap)
         {
@@ -76,6 +77,7 @@ public class Board
                 board[TempSwapRow][TempSwapColumn] = board[Row][Column];
                 board[Row][Column] = TempSwap;
             }
+            Player.SwitchTurn();
         }
         signal = new Highlight();
         PieceSwap = false;
