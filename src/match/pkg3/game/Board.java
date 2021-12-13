@@ -42,11 +42,11 @@ public class Board
         
         int num = (int)(Math.random() * 3) + 1;
         if(num == 1)
-            board[zrow][zcol] = new RedCrystal(Piece.CrystalType.Red,zrow,zcol);
+            returnPiece = new RedCrystal(Piece.CrystalType.Red,zrow,zcol);
         else if(num == 2)
-            board[zrow][zcol] = new GreenCrystal(Piece.CrystalType.Green,zrow,zcol);
+            returnPiece = new GreenCrystal(Piece.CrystalType.Green,zrow,zcol);
         else if(num == 3)
-            board[zrow][zcol] = new BlueCrystal(Piece.CrystalType.Blue,zrow,zcol);
+            returnPiece = new BlueCrystal(Piece.CrystalType.Blue,zrow,zcol);
         
         return returnPiece;
     }
