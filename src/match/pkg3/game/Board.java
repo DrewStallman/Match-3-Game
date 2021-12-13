@@ -25,15 +25,11 @@ public class Board
                 int Row = zrow;
                 if (board[zrow][zcol] == null)
                 {
-                    while (Row > 0 && board[Row][zcol] == null)
-                    {
-                        board[Row][zcol] = board[Row-1][zcol];
-                        Row--;
-                    }
-                    board[0][zcol] = RanPiece(zrow,zcol);
+                    board[zrow][zcol] = RanPiece(zrow,zcol);
                 }
             }
         }
+        CheckMatch();
     }
     
     public static Piece RanPiece(int zrow,int zcol)
@@ -96,225 +92,148 @@ public class Board
         {
             for (int zcol=0;zcol<NUM_COLUMNS;zcol++)        
             {
-                switch (board[zrow][zcol].getType()) 
-                {
-                    case Blue:
-                        int wcol = zcol;
-                        blueCount++;
-                        for (int i=wcol;i<NUM_COLUMNS-1;i++)
-                        {
-                            if (wcol+1 < NUM_COLUMNS && board[zrow][wcol+1].getType() == Piece.CrystalType.Blue)
-                            {
-                                wcol++;
-                                blueCount++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        if (blueCount > 2)
-                        {
-                            wcol = zcol;
-                            
-                            for (int j=wcol;j<(blueCount+wcol);j++)
-                            {
-                                Board.pieces.add(board[zrow][j]);
-                            }
-                            blueCount = 0;
-                            break;
-                        }
-                        else 
-                        {
-                            blueCount = 0;
-                            break;
-                        }
-                    case Red:
-                        int mcol = zcol;
-                        redCount++;
-                        for (int i=mcol;i<NUM_COLUMNS-1;i++)
-                        {
-                            if (mcol+1 < NUM_COLUMNS && board[zrow][mcol+1].getType() == Piece.CrystalType.Red)
-                            {
-                                mcol++;
-                                redCount++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        if (redCount > 2)
-                        {
-                            mcol = zcol;
-                            
-                            for (int j=mcol;j<(redCount+mcol);j++)
-                            {
-                                Board.pieces.add(board[zrow][j]);
-                            }
-                            redCount = 0;
-                            break;
-                        }
-                        else 
-                        {
-                            redCount = 0;
-                            break;
-                        }
-                    case Green:
-                        int pcol = zcol;
-                        greenCount++;
-                        for (int i=pcol;i<NUM_COLUMNS-1;i++)
-                        {
-                            if (pcol+1 < NUM_COLUMNS && board[zrow][pcol+1].getType() == Piece.CrystalType.Green)
-                            {
-                                pcol++;
-                                greenCount++;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        if (greenCount > 2)
-                        {
-                            pcol = zcol;
-                            
-                            for (int j=pcol;j<(greenCount+pcol);j++)
-                            {
-                                Board.pieces.add(board[zrow][j]);
-                            }
-                            greenCount = 0;
-                            break;
-                        }
-                        else 
-                        {
-                            greenCount = 0;
-                            break;
-                        }
-                    default:
-                        break;
-                }
+               if (zcol < NUM_COLUMNS && board[zrow][zcol].getType() == Piece.CrystalType.Blue)
+               {
+                   int wcol = zcol;
+                   int wrow = zrow;
+                   while (wcol < NUM_COLUMNS && board[wrow][wcol].getType() == Piece.CrystalType.Blue)
+                   {
+                       blueCount++;
+                       wcol++;
+                   }
+                   if (blueCount >= 3)
+                   {
+                       while (zcol < NUM_COLUMNS && board[zrow][zcol].getType() == Piece.CrystalType.Blue)
+                       {
+                           board[zrow][zcol] = null;
+                           RemovePieces();
+                           zcol++;
+                       }
+                   }
+                   blueCount = 0;
+               }
+               if (zcol < NUM_COLUMNS && board[zrow][zcol].getType() == Piece.CrystalType.Green)
+               {
+                   int wcol = zcol;
+                   int wrow = zrow;
+                   while (wcol < NUM_COLUMNS && board[wrow][wcol].getType() == Piece.CrystalType.Green)
+                   {
+                       greenCount++;
+                       wcol++;
+                   }
+                   if (greenCount >= 3)
+                   {
+                       while (zcol < NUM_COLUMNS && board[zrow][zcol].getType() == Piece.CrystalType.Green)
+                       {
+                           board[zrow][zcol] = null;
+                           RemovePieces();
+                           zcol++;
+                       }
+                   }
+                   greenCount = 0;
+               }
+               if (zcol < NUM_COLUMNS && board[zrow][zcol].getType() == Piece.CrystalType.Red)
+               {
+                   int wcol = zcol;
+                   int wrow = zrow;
+                   while (wcol < NUM_COLUMNS && board[wrow][wcol].getType() == Piece.CrystalType.Red)
+                   {
+                       redCount++;
+                       wcol++;
+                   }
+                   if (redCount >= 3)
+                   {
+                       while (zcol < NUM_COLUMNS && board[zrow][zcol].getType() == Piece.CrystalType.Red)
+                       {
+                           board[zrow][zcol] = null;
+                           RemovePieces();
+                           zcol++;
+                       }
+                   }
+                   redCount = 0;
+               }
+
             }
             blueCount = 0;
             greenCount = 0;
             redCount = 0;
         }
-        
+        blueCount = 0;
+        greenCount = 0;
+        redCount = 0;
 //vertical match
         for (int zcol=0;zcol<NUM_COLUMNS;zcol++)
         {
             for (int zrow=0;zrow<NUM_ROWS;zrow++)        
             {
-                switch (board[zrow][zcol].getType()) 
+                if (zrow < NUM_ROWS && board[zrow][zcol].getType() == Piece.CrystalType.Blue)
                 {
-                    case Blue:
-                        int wrow = zrow;
+                    int wcol = zcol;
+                    int wrow = zrow;
+                    while (wrow < NUM_ROWS && board[wrow][wcol].getType() == Piece.CrystalType.Blue)
+                    {
                         blueCount++;
-                        for (int i=wrow;i<NUM_ROWS-1;i++)
+                        wrow++;
+                    }
+                    if (blueCount >= 3)
+                    {
+                        while (zrow < NUM_ROWS && board[zrow][zcol].getType() == Piece.CrystalType.Blue)
                         {
-                            if (wrow+1 < NUM_ROWS && board[wrow+1][zcol].getType() == Piece.CrystalType.Blue)
-                            {
-                                wrow++;
-                                blueCount++;
-                            }
-                            else
-                            {
-                                break;
-                            }
+                            board[zrow][zcol] = null;
+                            RemovePieces();
+                            zrow++;
                         }
-                        if (blueCount > 2)
-                        {
-                            wrow = zrow;
-                            
-                            for (int j=wrow;j<(blueCount+wrow);j++)
-                            {
-                                Board.pieces.add(board[j][zcol]);
-                            }
-                            blueCount = 0;
-                            break;
-                        }
-                        else 
-                        {
-                            blueCount = 0;
-                            break;
-                        }
-                    case Red:
-                        int mrow = zrow;
+                    }
+                    blueCount = 0;
+                }
+                if (zrow < NUM_ROWS && board[zrow][zcol].getType() == Piece.CrystalType.Red)
+                {
+                    int wcol = zcol;
+                    int wrow = zrow;
+                    while (wrow < NUM_ROWS && board[wrow][wcol].getType() == Piece.CrystalType.Red)
+                    {
                         redCount++;
-                        for (int i=mrow;i<NUM_ROWS-1;i++)
+                        wrow++;
+                    }
+                    if (redCount >= 3)
+                    {
+                        while (zrow < NUM_ROWS && board[zrow][zcol].getType() == Piece.CrystalType.Red)
                         {
-                            if (mrow+1 < NUM_ROWS && board[mrow+1][zcol].getType() == Piece.CrystalType.Red)
-                            {
-                                mrow++;
-                                redCount++;
-                            }
-                            else
-                            {
-                                break;
-                            }
+                            board[zrow][zcol] = null;
+                            RemovePieces();
+                            zrow++;
                         }
-                        if (redCount > 2)
-                        {
-                            mrow = zrow;
-                            
-                            for (int j=mrow;j<(redCount+mrow);j++)
-                            {
-                                Board.pieces.add(board[j][zcol]);
-                            }
-                            redCount = 0;
-                            break;
-                        }
-                        else 
-                        {
-                            redCount = 0;
-                            break;
-                        }
-                    case Green:
-                        int prow = zrow;
+                    }
+                    redCount = 0;
+                }
+                if (zrow < NUM_ROWS && board[zrow][zcol].getType() == Piece.CrystalType.Green)
+                {
+                    int wcol = zcol;
+                    int wrow = zrow;
+                    while (wrow < NUM_ROWS && board[wrow][wcol].getType() == Piece.CrystalType.Green)
+                    {
                         greenCount++;
-                        for (int i=prow;i<NUM_ROWS-1;i++)
+                        wrow++;
+                    }
+                    if (greenCount >= 3)
+                    {
+                        while (zrow < NUM_ROWS && board[zrow][zcol].getType() == Piece.CrystalType.Green)
                         {
-                            if (prow+1 < NUM_ROWS && board[prow][zcol].getType() == Piece.CrystalType.Green)
-                            {
-                                prow++;
-                                greenCount++;
-                            }
-                            else
-                            {
-                                break;
-                            }
+                            board[zrow][zcol] = null;
+                            RemovePieces();
+                            zrow++;
                         }
-                        if (greenCount > 2)
-                        {
-                            prow = zrow;
-                            
-                            for (int j=prow;j<(greenCount+prow);j++)
-                            {
-                                Board.pieces.add(board[j][zcol]);
-                            }
-                            greenCount = 0;
-                            break;
-                        }
-                        else 
-                        {
-                            greenCount = 0;
-                            break;
-                        }
-                    default:
-                        break;
+                    }
+                    greenCount = 0;
                 }
             }
             blueCount = 0;
             greenCount = 0;
             redCount = 0;
         }
-        
-        for (int i=0;i<Board.pieces.size();i++)
-        {
-            board[Board.pieces.get(i).getRow()][Board.pieces.get(i).getColumn()] = null;
-        }
-        Board.pieces.removeAll(pieces);
-        RemovePieces();
+        blueCount = 0;
+        greenCount = 0;
+        redCount = 0;
     }
     
     public static void Reset() {
