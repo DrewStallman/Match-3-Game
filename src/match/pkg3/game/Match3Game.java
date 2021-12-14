@@ -206,9 +206,8 @@ public class Match3Game extends JFrame implements Runnable {
             BlueCrystal  = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
             GreenCrystal  = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
             reset();
-
         }
-
+        
         
     }
 
