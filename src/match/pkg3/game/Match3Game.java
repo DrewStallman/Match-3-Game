@@ -157,7 +157,12 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawImage(Circle,Window.xsize-200, 430, 150, 150,this);
         g.drawImage(Circle,Window.xsize-200, 580, 150, 150,this);      
         g.drawImage(Circle,Window.xsize-200, 730, 150, 150,this);
-        g.drawImage(RedCrystal,Window.xsize-180, 730, 75, 75,this);
+        g.drawImage(RedCrystal,Window.xsize-165, 740, 75, 75,this);
+        g.drawImage(BlueCrystal,Window.xsize-165, 590, 75, 75,this);
+        g.drawImage(GreenCrystal,Window.xsize-165, 440, 75, 75,this);
+        g.drawImage(RedCrystal,85, 740, 75, 75,this);
+        g.drawImage(BlueCrystal,85, 590, 75, 75,this);
+        g.drawImage(GreenCrystal,85, 440, 75, 75,this);
         Board.Draw(g);
         
 
