@@ -47,6 +47,22 @@ public class Player
     {
         winner = true;
     }
+    public int getPoints(Color color)
+    {
+        if (color == Color.BLUE)
+        {
+            return bluePoints;
+        }
+        else if (color == Color.RED)
+        {
+            return redPoints;
+        }
+        else if (color == Color.GREEN)
+        {
+            return greenPoints;
+        }
+        return 0;
+    }
     public void changePoints(Color color,int value)
     {
         if (color == Color.BLUE)
