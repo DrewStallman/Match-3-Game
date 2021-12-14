@@ -193,9 +193,8 @@ public class Match3Game extends JFrame implements Runnable {
             PlayerBar = Toolkit.getDefaultToolkit().getImage("./PlayerTurn.PNG");
             BoardOutline = Toolkit.getDefaultToolkit().getImage("./BoardOutline.PNG");
             reset();
-
         }
-
+        
         
     }
 

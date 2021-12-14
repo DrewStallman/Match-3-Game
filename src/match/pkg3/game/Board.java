@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Board 
 {
     private static boolean PieceSwap;
-    private static boolean GameStart;
+    private static boolean StartUp;
     private static Piece TempSwap = null;
     private static int TempSwapRow = 0;
     private static int TempSwapColumn = 0;
@@ -76,8 +76,8 @@ public class Board
             {
                 board[TempSwapRow][TempSwapColumn] = board[Row][Column];
                 board[Row][Column] = TempSwap;
+                Player.SwitchTurn();
             }
-            Player.SwitchTurn();
         }
         signal = new Highlight();
         PieceSwap = false;
@@ -111,6 +111,10 @@ public class Board
                            RemovePieces();
                            zcol++;
                        }
+                       if (!StartUp)
+                       {
+                           Player.GetCurrentTurn().changePoints(Color.BLUE, blueCount);
+                       }
                    }
                    blueCount = 0;
                }
@@ -131,6 +135,10 @@ public class Board
                            RemovePieces();
                            zcol++;
                        }
+                       if (!StartUp)
+                       {
+                           Player.GetCurrentTurn().changePoints(Color.GREEN, greenCount);
+                       }
                    }
                    greenCount = 0;
                }
@@ -150,6 +158,10 @@ public class Board
                            board[zrow][zcol] = null;
                            RemovePieces();
                            zcol++;
+                       }
+                       if (!StartUp)
+                       {
+                           Player.GetCurrentTurn().changePoints(Color.RED, redCount);
                        }
                    }
                    redCount = 0;
@@ -185,6 +197,10 @@ public class Board
                             RemovePieces();
                             zrow++;
                         }
+                        if (!StartUp)
+                        {
+                            Player.GetCurrentTurn().changePoints(Color.BLUE, blueCount);
+                        }
                     }
                     blueCount = 0;
                 }
@@ -204,6 +220,10 @@ public class Board
                             board[zrow][zcol] = null;
                             RemovePieces();
                             zrow++;
+                        }
+                        if (!StartUp)
+                        {
+                            Player.GetCurrentTurn().changePoints(Color.RED, redCount);
                         }
                     }
                     redCount = 0;
@@ -225,6 +245,10 @@ public class Board
                             RemovePieces();
                             zrow++;
                         }
+                        if (!StartUp)
+                        {
+                            Player.GetCurrentTurn().changePoints(Color.GREEN, greenCount);
+                        }
                     }
                     greenCount = 0;
                 }
@@ -241,7 +265,7 @@ public class Board
     public static void Reset() {
         PieceSwap = false;
         signal = new Highlight();
-        GameStart = true;
+        StartUp = true;
 //clear the board.
         for (int zrow=0;zrow<NUM_ROWS;zrow++)
         {
@@ -257,6 +281,7 @@ public class Board
             }
         }
         CheckMatch();
+        StartUp = false;
     }
     
     public static void Draw(Graphics2D g) {
