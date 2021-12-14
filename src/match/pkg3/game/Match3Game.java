@@ -19,6 +19,10 @@ public class Match3Game extends JFrame implements Runnable {
     Image MiddlePiece;
     Image PlayerBar;
     Image BoardOutline;
+    Image Circle;
+    Image RedCrystal;
+    Image BlueCrystal;
+    Image GreenCrystal;
     public static void main(String[] args) {
         Match3Game frame = new Match3Game();
         frame.setSize(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
@@ -147,8 +151,13 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(BoardOutline,282, 400, 1039, 500,this);
-              
-        
+        g.drawImage(Circle,50, 430, 150, 150,this);
+        g.drawImage(Circle,50, 580, 150, 150,this);      
+        g.drawImage(Circle,50, 730, 150, 150,this);
+        g.drawImage(Circle,Window.xsize-200, 430, 150, 150,this);
+        g.drawImage(Circle,Window.xsize-200, 580, 150, 150,this);      
+        g.drawImage(Circle,Window.xsize-200, 730, 150, 150,this);
+        g.drawImage(RedCrystal,Window.xsize-180, 730, 75, 75,this);
         Board.Draw(g);
         
 
@@ -192,6 +201,10 @@ public class Match3Game extends JFrame implements Runnable {
             MiddlePiece = Toolkit.getDefaultToolkit().getImage("./MiddlePiece.PNG");
             PlayerBar = Toolkit.getDefaultToolkit().getImage("./PlayerTurn.PNG");
             BoardOutline = Toolkit.getDefaultToolkit().getImage("./BoardOutline.PNG");
+            Circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
+            RedCrystal = Toolkit.getDefaultToolkit().getImage("./Red Crystal.PNG");
+            BlueCrystal  = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
+            GreenCrystal  = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
             reset();
 
         }
