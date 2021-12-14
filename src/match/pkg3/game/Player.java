@@ -4,6 +4,7 @@ public class Player
 {
     private static Player currentTurn;
     private static Player players[] = new Player[2];
+    private int playerHealth;
     private int greenPoints;
     private int redPoints;
     private int bluePoints;
@@ -35,6 +36,7 @@ public class Player
     Player()
     {
         winner = false;
+        playerHealth = 0;
         greenPoints = 0;
         redPoints = 0;
         bluePoints = 0;
