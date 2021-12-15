@@ -45,7 +45,11 @@ public class Match3Game extends JFrame implements Runnable {
                 
                 if (e.BUTTON1 == e.getButton() ) {
                     Board.SwitchPieces(e.getX(),e.getY());
-                    
+                    if (e.getX() > 130 - 65 &&
+        e.getX() < 130 + 65 &&
+        e.getY() > 650 - 65 &&
+        e.getY() < 650 + 65)
+                        System.out.println("test");
                 }
 
                 if (e.BUTTON3 == e.getButton()) {
@@ -201,8 +205,7 @@ public class Match3Game extends JFrame implements Runnable {
     }
     
     public void TurnIndicator()
-    {
-        g.drawImage(MiddlePiece,387, 20, 825, 80,this);
+    {   
         g.drawImage(PlayerBar,685, 170, 240, -140,this);
         g.setFont (new Font ("Arial",Font.TYPE1_FONT, 55));
         g.drawString("Player", 720, 77);
@@ -219,6 +222,7 @@ public class Match3Game extends JFrame implements Runnable {
         g.fillRect(0, 0, 511 - damageAdd1, Window.ysize/9-5);
         g.setColor(Color.green);
         g.fillRect(1088 + damageAdd2, 0, 510, Window.ysize/9-5);
+        g.drawImage(MiddlePiece,387, 20, 825, 80,this);
         g.setColor(Color.BLACK);
         g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
         g.drawString(health1 + "%", 100, 80);
@@ -231,9 +235,6 @@ public class Match3Game extends JFrame implements Runnable {
     public void Crystals()
     {
         g.drawImage(Circle,50, 430, 150, 150,this);
-        g.setColor(Color.WHITE);
-        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 100));
-        g.drawString(""+Player.GetPlayer1().getPoints(Color.BLUE), 50, 430);
         g.drawImage(Circle,50, 580, 150, 150,this);
         g.drawImage(Circle,50, 730, 150, 150,this);
         g.drawImage(Circle,Window.xsize-200, 430, 150, 150,this);
@@ -244,6 +245,14 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawImage(GreenCrystal,Window.xsize-165, 440, 75, 75,this);
         g.drawImage(RedCrystal,85, 740, 75, 75,this);
         g.drawImage(BlueCrystal,85, 590, 75, 75,this);
-        g.drawImage(GreenCrystal,85, 440, 75, 75,this);
+        g.drawImage(GreenCrystal,85, 440, 75, 75,this);        
+        g.setColor(Color.black);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 30));
+        g.drawString(""+Player.GetPlayer2().getPoints(Color.BLUE), 104, 705);
+        g.drawString(""+Player.GetPlayer1().getPoints(Color.BLUE), Window.xsize-145, 705);
+        g.drawString(""+Player.GetPlayer2().getPoints(Color.RED), 104, 855);
+        g.drawString(""+Player.GetPlayer1().getPoints(Color.RED), Window.xsize-145, 855);
+        g.drawString(""+Player.GetPlayer2().getPoints(Color.GREEN), 104, 555);
+        g.drawString(""+Player.GetPlayer1().getPoints(Color.GREEN), Window.xsize-145, 555);
     }
 }
