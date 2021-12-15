@@ -163,6 +163,7 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawImage(RedCrystal,85, 740, 75, 75,this);
         g.drawImage(BlueCrystal,85, 590, 75, 75,this);
         g.drawImage(GreenCrystal,85, 440, 75, 75,this);
+        //Player.GetCurrentTurn().getPoints(Color.blue)
         Board.Draw(g);
         
 
