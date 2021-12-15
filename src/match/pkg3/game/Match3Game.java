@@ -8,6 +8,13 @@ import javax.swing.*;
 
 public class Match3Game extends JFrame implements Runnable {
     boolean animateFirstTime = true;
+    int health1 = 100;
+    int health2 = 100;
+    int damage1 = 0;
+    int damage2 = 0;
+    int damageAdd1 = 0;
+    int damageAdd2 = 0;
+    int playerTurn;
     Image image;
     Graphics2D g;
     
@@ -116,54 +123,15 @@ public class Match3Game extends JFrame implements Runnable {
             gOld.drawImage(image, 0, 0, null);
             return;
         }
-                int health1 = 100;
-                int health2 = 100;
-                int damage1 = 0;
-                int damage2 = 0;
-                int damageAdd1 = 0;
-                int damageAdd2 = 0;
-                int playerTurn;
-                health1 -= damage1;
-                health2 -= damage2;
-                damageAdd1 = damage1*5;
-                damageAdd2 = damage2*5;
-                if(Player.GetCurrentTurn() == Player.GetPlayer1())
-                    playerTurn = 1;
-                else
-                    playerTurn = 2;
-                   g.drawImage(HealthBar1,1066, 30, Window.xsize/3, Window.ysize/13,this);
-        g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this);
-        g.setColor(Color.green);
-        g.fillRect(0, 0, 511 - damageAdd1, Window.ysize/9-5);
-        g.setColor(Color.green);
-        g.fillRect(1088 + damageAdd2, 0, 510, Window.ysize/9-5);
-        g.setColor(Color.BLACK);
-        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
-        g.drawString(health1 + "%", 100, 80);
-        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
-        g.drawString(health2 + "%", 1350, 80);
-        g.drawImage(MiddlePiece,387, 20, 825, 80,this);
-        g.drawImage(PlayerBar,685, 170, 240, -140,this);
-        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 55));
-        g.drawString("Player", 720, 77);
-        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 75));
-        g.drawString("" + playerTurn, 780, 161);
-        g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
-        g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this);
-        g.drawImage(BoardOutline,282, 400, 1039, 500,this);
-        g.drawImage(Circle,50, 430, 150, 150,this);
-        g.drawImage(Circle,50, 580, 150, 150,this);      
-        g.drawImage(Circle,50, 730, 150, 150,this);
-        g.drawImage(Circle,Window.xsize-200, 430, 150, 150,this);
-        g.drawImage(Circle,Window.xsize-200, 580, 150, 150,this);      
-        g.drawImage(Circle,Window.xsize-200, 730, 150, 150,this);
-        g.drawImage(RedCrystal,Window.xsize-165, 740, 75, 75,this);
-        g.drawImage(BlueCrystal,Window.xsize-165, 590, 75, 75,this);
-        g.drawImage(GreenCrystal,Window.xsize-165, 440, 75, 75,this);
-        g.drawImage(RedCrystal,85, 740, 75, 75,this);
-        g.drawImage(BlueCrystal,85, 590, 75, 75,this);
-        g.drawImage(GreenCrystal,85, 440, 75, 75,this);
-        //Player.GetCurrentTurn().getPoints(Color.blue)
+        
+        if(Player.GetCurrentTurn() == Player.GetPlayer1())
+            playerTurn = 1;
+        else
+            playerTurn = 2;
+        
+        HealthBar();
+        TurnIndicator(); 
+        Crystals();
         Board.Draw(g);
         
 
@@ -231,11 +199,51 @@ public class Match3Game extends JFrame implements Runnable {
         }
         relaxer = null;
     }
-
+    
+    public void TurnIndicator()
+    {
+        g.drawImage(MiddlePiece,387, 20, 825, 80,this);
+        g.drawImage(PlayerBar,685, 170, 240, -140,this);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 55));
+        g.drawString("Player", 720, 77);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 75));
+        g.drawString("" + playerTurn, 780, 161);
+        g.drawImage(BoardOutline,282, 400, 1039, 500,this);
+    }
+    
+    public void HealthBar()
+    {
+        g.drawImage(HealthBar1,1066, 30, Window.xsize/3, Window.ysize/13,this);
+        g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this);
+        g.setColor(Color.green);
+        g.fillRect(0, 0, 511 - damageAdd1, Window.ysize/9-5);
+        g.setColor(Color.green);
+        g.fillRect(1088 + damageAdd2, 0, 510, Window.ysize/9-5);
+        g.setColor(Color.BLACK);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
+        g.drawString(health1 + "%", 100, 80);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 50));
+        g.drawString(health2 + "%", 1350, 80);
+        g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
+        g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this);
+    }
+    
+    public void Crystals()
+    {
+        g.drawImage(Circle,50, 430, 150, 150,this);
+        g.setColor(Color.WHITE);
+        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 100));
+        g.drawString(""+Player.GetPlayer1().getPoints(Color.BLUE), 50, 430);
+        g.drawImage(Circle,50, 580, 150, 150,this);
+        g.drawImage(Circle,50, 730, 150, 150,this);
+        g.drawImage(Circle,Window.xsize-200, 430, 150, 150,this);
+        g.drawImage(Circle,Window.xsize-200, 580, 150, 150,this);      
+        g.drawImage(Circle,Window.xsize-200, 730, 150, 150,this);
+        g.drawImage(RedCrystal,Window.xsize-165, 740, 75, 75,this);
+        g.drawImage(BlueCrystal,Window.xsize-165, 590, 75, 75,this);
+        g.drawImage(GreenCrystal,Window.xsize-165, 440, 75, 75,this);
+        g.drawImage(RedCrystal,85, 740, 75, 75,this);
+        g.drawImage(BlueCrystal,85, 590, 75, 75,this);
+        g.drawImage(GreenCrystal,85, 440, 75, 75,this);
+    }
 }
-
- 
-
- 
-
- 
