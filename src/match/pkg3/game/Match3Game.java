@@ -15,6 +15,7 @@ public class Match3Game extends JFrame implements Runnable {
     int damageAdd1 = 0;
     int damageAdd2 = 0;
     int playerTurn;
+    int Time;
     Image image;
     Graphics2D g;
     
@@ -31,8 +32,9 @@ public class Match3Game extends JFrame implements Runnable {
     Image RedCrystal;
     Image BlueCrystal;
     Image GreenCrystal;
+    static Match3Game frame;
     public static void main(String[] args) {
-        Match3Game frame = new Match3Game();
+        frame = new Match3Game();
         frame.setSize(Window.WINDOW_WIDTH, Window.WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -45,6 +47,8 @@ public class Match3Game extends JFrame implements Runnable {
             public void mousePressed(MouseEvent e) {
                 
                 if (e.BUTTON1 == e.getButton() ) {
+                    if (Time <= 50)
+                        return;
                     Board.SwitchPieces(e.getX(),e.getY());
 //                    if (e.getX() > 130 - 65 &&
 //        e.getX() < 130 + 65 &&
@@ -155,6 +159,7 @@ public class Match3Game extends JFrame implements Runnable {
             return;
         }
         
+        
         if(Player.GetCurrentTurn() == Player.GetPlayer1())
             playerTurn = 1;
         else
@@ -165,7 +170,17 @@ public class Match3Game extends JFrame implements Runnable {
         Crystals();
         Board.Draw(g);
         
-
+        if (Time < 50)
+        {
+            g.setColor(Color.WHITE);
+            g.fillRect(0,0,Window.WINDOW_WIDTH,Window.WINDOW_HEIGHT);
+            g.setColor(Color.BLACK);
+            g.setFont (new Font ("Arial",Font.TYPE1_FONT, 40));
+            g.drawString("Hello, this is a match 3 game, match 3 of the same pieces for one point of that ",50,100);
+            g.drawString("piece type. The points for each crystal type max out at 10, click on the point ",50,140);
+            g.drawString("indicators to use that attack. ",50,180);
+        }
+        
         gOld.drawImage(image, 0, 0, null);
     }
 
@@ -188,10 +203,10 @@ public class Match3Game extends JFrame implements Runnable {
     public void reset() {
         Board.Reset();
         Player.Reset();
+        Time = 0;
     }
 /////////////////////////////////////////////////////////////////////////
     public void animate() {
-
         if (animateFirstTime) {
             animateFirstTime = false;
             if (Window.xsize != getSize().width || Window.ysize != getSize().height) {
@@ -215,6 +230,7 @@ public class Match3Game extends JFrame implements Runnable {
         }
         
         
+        Time++;
     }
 
 ////////////////////////////////////////////////////////////////////////////

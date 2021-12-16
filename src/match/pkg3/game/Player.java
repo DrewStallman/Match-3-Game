@@ -79,6 +79,18 @@ public class Player
         {
             greenPoints += value;
         }
+        if (bluePoints > 10)
+        {
+            bluePoints = 10;
+        }
+        else if (redPoints > 10)
+        {
+            redPoints = 10;
+        }
+        else if (greenPoints > 10)
+        {
+            greenPoints = 10;
+        }
     }
 }
 
