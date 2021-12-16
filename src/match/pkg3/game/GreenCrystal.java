@@ -7,7 +7,7 @@ public class GreenCrystal extends Piece {
     {
         super(_type,_row,_col);
         StaticImage = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
-    }    
+    }
     
     public void draw(Graphics2D g,int row,int column,int xdelta,int ydelta)
     {
