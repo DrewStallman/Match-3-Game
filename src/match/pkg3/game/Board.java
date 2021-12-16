@@ -47,7 +47,7 @@ public class Board
         return returnPiece;
     }
     
-    public static void SwitchPieces(int xpixel,int ypixel) 
+    public static void SwitchPieces(int xpixel,int ypixel,Match3Game frame) 
     {
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
@@ -76,7 +76,13 @@ public class Board
             {
                 board[TempSwapRow][TempSwapColumn] = board[Row][Column];
                 board[Row][Column] = TempSwap;
-                Player.SwitchTurn();
+
+                if (frame.health1 == 0)
+                    Player.GetPlayer1().setWinner();
+                if (frame.health2 == 0)
+                    Player.GetPlayer2().setWinner();
+                else
+                    Player.SwitchTurn();
             }
         }
         signal = new Highlight();
@@ -284,7 +290,7 @@ public class Board
         StartUp = false;
     }
     
-    public static void Draw(Graphics2D g) {
+    public static void Draw(Graphics2D g,Match3Game frame) {
 //draw grid
         int ydelta = Window.getHeight2()/NUM_ROWS;
         int xdelta = Window.getWidth2()/NUM_COLUMNS;
@@ -312,7 +318,16 @@ public class Board
                 if (board[zrow][zcol] != null)
                     board[zrow][zcol].draw(g, zrow, zcol,xdelta, ydelta);
             }
-        }   
+        }
+        
+        
+
+            g.setColor(Color.white);
+            if (frame.health1 == 0)
+                StringCentered(g,500,554,"Player 1 is the Winner","Arial",100);
+            else if (frame.health2 == 0)
+                StringCentered(g,500,554,"Player 2 is the Winner","Arial",100);
+        
     }
     
     public static void StringCentered(Graphics2D g,int xpos,int ypos,String text,String font,int size)

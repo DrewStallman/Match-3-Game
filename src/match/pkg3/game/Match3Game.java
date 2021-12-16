@@ -11,7 +11,7 @@ public class Match3Game extends JFrame implements Runnable {
     int health1 = 100;
     int health2 = 100;
     int damage1 = 0;
-    int damage2 = 1;
+    int damage2 = 0;
     int damageAdd1 = 0;
     int damageAdd2 = 0;
     int playerTurn;
@@ -49,38 +49,8 @@ public class Match3Game extends JFrame implements Runnable {
                 if (e.BUTTON1 == e.getButton() ) {
                     if (Time <= 50)
                         return;
-                    Board.SwitchPieces(e.getX(),e.getY());
-//                    if (e.getX() > 130 - 65 &&
-//        e.getX() < 130 + 65 &&
-//        e.getY() > 650 - 65 &&
-//        e.getY() < 650 + 65 && Player.GetPlayer1().getPoints(Color.BLUE) >= 3)
-//                        System.out.println("test");
-//                    else if (e.getX() > Window.xsize-145 - 65 &&
-//        e.getX() < Window.xsize-145 + 65 &&
-//        e.getY() > 650 - 65 &&
-//        e.getY() < 650 + 65 && Player.GetPlayer2().getPoints(Color.BLUE) >= 3)
-//                       System.out.println("test2");
-//                    else if (e.getX() > 130 - 65 &&
-//        e.getX() < 130 + 65 &&
-//        e.getY() > 800 - 65 &&
-//        e.getY() < 800 + 65 && Player.GetPlayer1().getPoints(Color.RED) >= 3)
-//                        System.out.println("test3");
-//                    else if (e.getX() > Window.xsize-145 - 65 &&
-//        e.getX() < Window.xsize-145 + 65 &&
-//        e.getY() > 800 - 65 &&
-//        e.getY() < 800 + 65 && Player.GetPlayer2().getPoints(Color.RED) >= 3)
-//                       System.out.println("test4");
-//                    else if (e.getX() > 130 - 65 &&
-//        e.getX() < 130 + 65 &&
-//        e.getY() > 500 - 65 &&
-//        e.getY() < 500 + 65 && Player.GetPlayer1().getPoints(Color.GREEN) >= 3)
-//                        System.out.println("test5");
-//                    else if (e.getX() > Window.xsize-145 - 65 &&
-//        e.getX() < Window.xsize-145 + 65 &&
-//        e.getY() > 500 - 65 &&
-//        e.getY() < 500 + 65 && Player.GetPlayer2().getPoints(Color.GREEN) >= 3)
-//                       System.out.println("test6"); 
-                CrystalsHighlighted(e.getX(),e.getY());
+                    Board.SwitchPieces(e.getX(),e.getY(),frame);
+                    CrystalsHighlighted(e.getX(),e.getY());
                 }
                 
                 if (e.BUTTON3 == e.getButton()) {
@@ -168,7 +138,7 @@ public class Match3Game extends JFrame implements Runnable {
         HealthBar();
         TurnIndicator(); 
         Crystals();
-        Board.Draw(g);
+        Board.Draw(g,frame);
         
         if (Time < 50)
         {
@@ -257,13 +227,15 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawString("" + playerTurn, 780, 161);
         g.drawImage(BoardOutline,282, 400, 1039, 500,this);
     }
-    
-    public void HealthBar()
+    public void Damage()
     {
         health1 -= damage1;
         health2 -= damage2;
         damageAdd1 = damage1*5;
         damageAdd2 = damage2*5;
+    }
+    public void HealthBar()
+    {
         g.drawImage(HealthBar1,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this);
         g.setColor(Color.green);
@@ -279,6 +251,7 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this);
     }
+    
     public void CrystalsHighlighted(int xpos, int ypos)
     {
         //do not change numbers
@@ -317,9 +290,6 @@ public class Match3Game extends JFrame implements Runnable {
     public void Crystals()
     {
                     
-        
-        g.drawImage(CircleHighlighted,50, 580, 150, 150,this);//blue1      
-        
         g.drawImage(Circle,50, 430, 150, 150,this);
         g.drawImage(Circle,50, 580, 150, 150,this);
         g.drawImage(Circle,50, 730, 150, 150,this);
