@@ -11,7 +11,7 @@ public class Match3Game extends JFrame implements Runnable {
     int health1 = 100;
     int health2 = 100;
     int damage1 = 0;
-    int damage2 = 0;
+    int damage2 = 1;
     int damageAdd1 = 0;
     int damageAdd2 = 0;
     int playerTurn;
@@ -244,6 +244,10 @@ public class Match3Game extends JFrame implements Runnable {
     
     public void HealthBar()
     {
+        health1 -= damage1;
+        health2 -= damage2;
+        damageAdd1 = damage1*5;
+        damageAdd2 = damage2*5;
         g.drawImage(HealthBar1,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2,0, 30, Window.xsize/3, Window.ysize/13,this);
         g.setColor(Color.green);
@@ -266,43 +270,40 @@ public class Match3Game extends JFrame implements Runnable {
         xpos < 130 + 65 &&
         ypos > 650 - 65 &&
         ypos < 650 + 65 && Player.GetPlayer1().getPoints(Color.BLUE) >= 3)
-                        System.out.println("test");
+                        g.drawImage(CircleHighlighted,50, 580, 150, 150,this);//blue1
                     else if (xpos > Window.xsize-145 - 65 &&
         xpos < Window.xsize-145 + 65 &&
         ypos > 650 - 65 &&
         ypos < 650 + 65 && Player.GetPlayer2().getPoints(Color.BLUE) >= 3)
-                       System.out.println("test2");
+                       g.drawImage(CircleHighlighted,Window.xsize-200, 580, 150, 150,this);//blue2 
                     else if (xpos > 130 - 65 &&
         xpos < 130 + 65 &&
         ypos > 800 - 65 &&
         ypos < 800 + 65 && Player.GetPlayer1().getPoints(Color.RED) >= 3)
-                        System.out.println("test3");
+                        g.drawImage(CircleHighlighted,50, 730, 150, 150,this);//red1
                     else if (xpos > Window.xsize-145 - 65 &&
         xpos < Window.xsize-145 + 65 &&
         ypos > 800 - 65 &&
         ypos < 800 + 65 && Player.GetPlayer2().getPoints(Color.RED) >= 3)
-                       System.out.println("test4");
+                       g.drawImage(CircleHighlighted,Window.xsize-200, 730, 150, 150,this);//red2
                     else if (xpos > 130 - 65 &&
         xpos < 130 + 65 &&
         ypos > 500 - 65 &&
         ypos < 500 + 65 && Player.GetPlayer1().getPoints(Color.GREEN) >= 3)
-                        System.out.println("test5");
+                        g.drawImage(CircleHighlighted,50, 430, 150, 150,this);//green1
                     else if (xpos > Window.xsize-145 - 65 &&
         xpos < Window.xsize-145 + 65 &&
         ypos > 500 - 65 &&
         ypos < 500 + 65 && Player.GetPlayer2().getPoints(Color.GREEN) >= 3)
-                       System.out.println("test6");
+                      g.drawImage(CircleHighlighted,Window.xsize-200, 430, 150, 150,this);//green2
     }
     
     public void Crystals()
     {
                     
-        g.drawImage(CircleHighlighted,50, 430, 150, 150,this);
-        g.drawImage(CircleHighlighted,50, 580, 150, 150,this);
-        g.drawImage(CircleHighlighted,50, 730, 150, 150,this);
-        g.drawImage(CircleHighlighted,Window.xsize-200, 430, 150, 150,this);
-        g.drawImage(CircleHighlighted,Window.xsize-200, 580, 150, 150,this);      
-        g.drawImage(CircleHighlighted,Window.xsize-200, 730, 150, 150,this);
+        
+        g.drawImage(CircleHighlighted,50, 580, 150, 150,this);//blue1      
+        
         g.drawImage(Circle,50, 430, 150, 150,this);
         g.drawImage(Circle,50, 580, 150, 150,this);
         g.drawImage(Circle,50, 730, 150, 150,this);
