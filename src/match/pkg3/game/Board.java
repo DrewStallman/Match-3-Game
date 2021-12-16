@@ -113,7 +113,7 @@ public class Board
                        }
                        if (!StartUp)
                        {
-                           Player.GetCurrentTurn().changePoints(Color.BLUE, blueCount);
+                           Player.GetCurrentTurn().changePoints(Color.BLUE, 1);
                        }
                    }
                    blueCount = 0;
@@ -137,7 +137,7 @@ public class Board
                        }
                        if (!StartUp)
                        {
-                           Player.GetCurrentTurn().changePoints(Color.GREEN, greenCount);
+                           Player.GetCurrentTurn().changePoints(Color.GREEN, 1);
                        }
                    }
                    greenCount = 0;
@@ -161,7 +161,7 @@ public class Board
                        }
                        if (!StartUp)
                        {
-                           Player.GetCurrentTurn().changePoints(Color.RED, redCount);
+                           Player.GetCurrentTurn().changePoints(Color.RED, 1);
                        }
                    }
                    redCount = 0;
@@ -199,7 +199,7 @@ public class Board
                         }
                         if (!StartUp)
                         {
-                            Player.GetCurrentTurn().changePoints(Color.BLUE, blueCount);
+                            Player.GetCurrentTurn().changePoints(Color.BLUE, 1);
                         }
                     }
                     blueCount = 0;
@@ -223,7 +223,7 @@ public class Board
                         }
                         if (!StartUp)
                         {
-                            Player.GetCurrentTurn().changePoints(Color.RED, redCount);
+                            Player.GetCurrentTurn().changePoints(Color.RED, 1);
                         }
                     }
                     redCount = 0;
@@ -247,7 +247,7 @@ public class Board
                         }
                         if (!StartUp)
                         {
-                            Player.GetCurrentTurn().changePoints(Color.GREEN, greenCount);
+                            Player.GetCurrentTurn().changePoints(Color.GREEN, 1);
                         }
                     }
                     greenCount = 0;
