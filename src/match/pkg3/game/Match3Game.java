@@ -4,10 +4,12 @@ import java.io.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class Match3Game extends JFrame implements Runnable {
     boolean animateFirstTime = true;
+    boolean circleClicked;
     int health1 = 100;
     int health2 = 100;
     int damage1 = 0;
@@ -18,6 +20,13 @@ public class Match3Game extends JFrame implements Runnable {
     int Time;
     Image image;
     Graphics2D g;
+    Circle leftCircle1;
+    Circle leftCircle2;
+    Circle leftCircle3;
+    
+    Circle rightCircle1;
+    Circle rightCircle2;
+    Circle rightCircle3;
     
     Image BackgroundImage;
     Image HealthBar1;
@@ -32,6 +41,7 @@ public class Match3Game extends JFrame implements Runnable {
     Image RedCrystal;
     Image BlueCrystal;
     Image GreenCrystal;
+    static ArrayList<Circle> circles = new ArrayList<>();
     static Match3Game frame;
     public static void main(String[] args) {
         frame = new Match3Game();
@@ -47,45 +57,15 @@ public class Match3Game extends JFrame implements Runnable {
             public void mousePressed(MouseEvent e) {
                 
                 if (e.BUTTON1 == e.getButton() ) {
-                    if (Time <= 50)
+                    if (Time <= 100)
                         return;
                     Board.SwitchPieces(e.getX(),e.getY());
-//                    if (e.getX() > 130 - 65 &&
-//        e.getX() < 130 + 65 &&
-//        e.getY() > 650 - 65 &&
-//        e.getY() < 650 + 65 && Player.GetPlayer1().getPoints(Color.BLUE) >= 3)
-//                        System.out.println("test");
-//                    else if (e.getX() > Window.xsize-145 - 65 &&
-//        e.getX() < Window.xsize-145 + 65 &&
-//        e.getY() > 650 - 65 &&
-//        e.getY() < 650 + 65 && Player.GetPlayer2().getPoints(Color.BLUE) >= 3)
-//                       System.out.println("test2");
-//                    else if (e.getX() > 130 - 65 &&
-//        e.getX() < 130 + 65 &&
-//        e.getY() > 800 - 65 &&
-//        e.getY() < 800 + 65 && Player.GetPlayer1().getPoints(Color.RED) >= 3)
-//                        System.out.println("test3");
-//                    else if (e.getX() > Window.xsize-145 - 65 &&
-//        e.getX() < Window.xsize-145 + 65 &&
-//        e.getY() > 800 - 65 &&
-//        e.getY() < 800 + 65 && Player.GetPlayer2().getPoints(Color.RED) >= 3)
-//                       System.out.println("test4");
-//                    else if (e.getX() > 130 - 65 &&
-//        e.getX() < 130 + 65 &&
-//        e.getY() > 500 - 65 &&
-//        e.getY() < 500 + 65 && Player.GetPlayer1().getPoints(Color.GREEN) >= 3)
-//                        System.out.println("test5");
-//                    else if (e.getX() > Window.xsize-145 - 65 &&
-//        e.getX() < Window.xsize-145 + 65 &&
-//        e.getY() > 500 - 65 &&
-//        e.getY() < 500 + 65 && Player.GetPlayer2().getPoints(Color.GREEN) >= 3)
-//                       System.out.println("test6"); 
-                CrystalsHighlighted(e.getX(),e.getY());
+                    IndicatorClick(e.getX(),e.getY());
                 }
                 
                 if (e.BUTTON3 == e.getButton()) {
                     //Board.RemovePiece(e.getX(),e.getY());
-                    Board.CheckMatch();
+                    //Board.CheckMatch();
                 }
                 repaint();
             }
@@ -167,10 +147,15 @@ public class Match3Game extends JFrame implements Runnable {
         
         HealthBar();
         TurnIndicator(); 
-        Crystals();
+        leftCircle1.draw(g);
+        leftCircle2.draw(g);
+        leftCircle3.draw(g);
+        rightCircle1.draw(g);
+        rightCircle2.draw(g);
+        rightCircle3.draw(g);
         Board.Draw(g);
         
-        if (Time < 50)
+        if (Time < 100)
         {
             g.setColor(Color.WHITE);
             g.fillRect(0,0,Window.WINDOW_WIDTH,Window.WINDOW_HEIGHT);
@@ -178,7 +163,9 @@ public class Match3Game extends JFrame implements Runnable {
             g.setFont (new Font ("Arial",Font.TYPE1_FONT, 40));
             g.drawString("Hello, this is a match 3 game, match 3 of the same pieces for one point of that ",50,100);
             g.drawString("piece type. The points for each crystal type max out at 10, click on the point ",50,140);
-            g.drawString("indicators to use that attack. ",50,180);
+            g.drawString("indicators to use that attack. The highlighted buttons on left or right of the ",50,180);
+            g.drawString("screen are the current player's attack buttons. Take your time and use your brain. ",50,220);
+            g.drawString("This is not on a timer and only one piece or attack can be moved/used per turn.",50,260);
         }
         
         gOld.drawImage(image, 0, 0, null);
@@ -203,6 +190,12 @@ public class Match3Game extends JFrame implements Runnable {
     public void reset() {
         Board.Reset();
         Player.Reset();
+        leftCircle1 = new Circle(BlueCrystal,Circle,50, 430);
+        leftCircle2 = new Circle(RedCrystal,Circle,50, 580);
+        leftCircle3 = new Circle(GreenCrystal,Circle,50, 730);
+        rightCircle1 = new Circle(BlueCrystal,Circle,Window.xsize-200, 430);
+        rightCircle2 = new Circle(RedCrystal,Circle,Window.xsize-200, 580);
+        rightCircle3 = new Circle(GreenCrystal,Circle,Window.xsize-200, 730);
         Time = 0;
     }
 /////////////////////////////////////////////////////////////////////////
@@ -222,7 +215,6 @@ public class Match3Game extends JFrame implements Runnable {
             PlayerBar = Toolkit.getDefaultToolkit().getImage("./PlayerTurn.PNG");
             BoardOutline = Toolkit.getDefaultToolkit().getImage("./BoardOutline.PNG");
             Circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
-            CircleHighlighted = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
             RedCrystal = Toolkit.getDefaultToolkit().getImage("./Red Crystal.PNG");
             BlueCrystal  = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
             GreenCrystal  = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
@@ -275,69 +267,57 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this);
     }
-    public void CrystalsHighlighted(int xpos, int ypos)
+    public void IndicatorClick(int xpos, int ypos)
     {
-        //do not change numbers
-        if (xpos > 130 - 65 &&
-        xpos < 130 + 65 &&
-        ypos > 650 - 65 &&
-        ypos < 650 + 65 && Player.GetPlayer1().getPoints(Color.BLUE) >= 3)
-                        System.out.println("test");
-                    else if (xpos > Window.xsize-145 - 65 &&
-        xpos < Window.xsize-145 + 65 &&
-        ypos > 650 - 65 &&
-        ypos < 650 + 65 && Player.GetPlayer2().getPoints(Color.BLUE) >= 3)
-                       System.out.println("test2");
-                    else if (xpos > 130 - 65 &&
-        xpos < 130 + 65 &&
-        ypos > 800 - 65 &&
-        ypos < 800 + 65 && Player.GetPlayer1().getPoints(Color.RED) >= 3)
-                        System.out.println("test3");
-                    else if (xpos > Window.xsize-145 - 65 &&
-        xpos < Window.xsize-145 + 65 &&
-        ypos > 800 - 65 &&
-        ypos < 800 + 65 && Player.GetPlayer2().getPoints(Color.RED) >= 3)
-                       System.out.println("test4");
-                    else if (xpos > 130 - 65 &&
-        xpos < 130 + 65 &&
-        ypos > 500 - 65 &&
-        ypos < 500 + 65 && Player.GetPlayer1().getPoints(Color.GREEN) >= 3)
-                        System.out.println("test5");
-                    else if (xpos > Window.xsize-145 - 65 &&
-        xpos < Window.xsize-145 + 65 &&
-        ypos > 500 - 65 &&
-        ypos < 500 + 65 && Player.GetPlayer2().getPoints(Color.GREEN) >= 3)
-                       System.out.println("test6");
-    }
-    
-    public void Crystals()
-    {
-                    
-        g.drawImage(CircleHighlighted,50, 430, 150, 150,this);
-        g.drawImage(CircleHighlighted,50, 580, 150, 150,this);
-        g.drawImage(CircleHighlighted,50, 730, 150, 150,this);
-        g.drawImage(CircleHighlighted,Window.xsize-200, 430, 150, 150,this);
-        g.drawImage(CircleHighlighted,Window.xsize-200, 580, 150, 150,this);      
-        g.drawImage(CircleHighlighted,Window.xsize-200, 730, 150, 150,this);
-        g.drawImage(Circle,50, 430, 150, 150,this);
-        g.drawImage(Circle,50, 580, 150, 150,this);
-        g.drawImage(Circle,50, 730, 150, 150,this);
-        g.drawImage(Circle,Window.xsize-200, 430, 150, 150,this);
-        g.drawImage(Circle,Window.xsize-200, 580, 150, 150,this);      
-        g.drawImage(Circle,Window.xsize-200, 730, 150, 150,this);
-        g.drawImage(RedCrystal,Window.xsize-165, 740, 75, 75,this);
-        g.drawImage(BlueCrystal,Window.xsize-165, 590, 75, 75,this);
-        g.drawImage(GreenCrystal,Window.xsize-165, 440, 75, 75,this);
-        g.drawImage(RedCrystal,85, 740, 75, 75,this);
-        g.drawImage(BlueCrystal,85, 590, 75, 75,this);
-        g.drawImage(GreenCrystal,85, 440, 75, 75,this);        
-        g.setColor(Color.black);
-        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 30));
-        g.drawString(""+Player.GetPlayer2().getPoints(Color.BLUE), 104, 705);
-        g.drawString(""+Player.GetPlayer1().getPoints(Color.BLUE), Window.xsize-145, 705);
-        g.drawString(""+Player.GetPlayer2().getPoints(Color.RED), 104, 855);
-        g.drawString(""+Player.GetPlayer1().getPoints(Color.RED), Window.xsize-145, 855);
-        g.drawString(""+Player.GetPlayer2().getPoints(Color.GREEN), 104, 555);
-        g.drawString(""+Player.GetPlayer1().getPoints(Color.GREEN), Window.xsize-145, 555);
+        if (Player.GetCurrentTurn() == Player.GetPlayer1())
+        {
+            leftCircle1.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
+            leftCircle2.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
+            leftCircle3.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
+            rightCircle1.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
+            rightCircle2.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
+            rightCircle3.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
+        }
+        else 
+        {
+            rightCircle1.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
+            rightCircle2.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
+            rightCircle3.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
+            leftCircle1.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
+            leftCircle2.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
+            leftCircle3.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
+        }
+        if (Player.GetCurrentTurn() == Player.GetPlayer1())
+        {
+            if (xpos >= leftCircle1.xpos-150 && xpos <= leftCircle1.xpos+150 && ypos >= leftCircle1.ypos-150 && ypos <= leftCircle1.ypos+150)
+            {
+                System.out.println("Click");
+            }
+            else if (xpos >= leftCircle2.xpos-150 && xpos <= leftCircle2.xpos+150 && ypos >= leftCircle2.ypos-150 && ypos <= leftCircle2.ypos+150)
+            {
+                System.out.println("Click");
+            }
+            else if (xpos >= leftCircle3.xpos-150 && xpos <= leftCircle3.xpos+150 && ypos >= leftCircle3.ypos-150 && ypos <= leftCircle3.ypos+150)
+            {
+                System.out.println("Click");
+            }
+        }
+        
+        if (Player.GetCurrentTurn() == Player.GetPlayer2())
+        {
+            if (xpos >= rightCircle1.xpos-150 && xpos <= rightCircle1.xpos+150 && ypos >= rightCircle1.ypos-150 && ypos <= rightCircle1.ypos+150)
+            {
+                System.out.println("Click");
+            }
+            else if (xpos >= rightCircle2.xpos-150 && xpos <= rightCircle2.xpos+150 && ypos >= rightCircle2.ypos-150 && ypos <= rightCircle2.ypos+150)
+            {
+                System.out.println("Click");
+            }
+            else if (xpos >= rightCircle3.xpos-150 && xpos <= rightCircle3.xpos+150 && ypos >= rightCircle3.ypos-150 && ypos <= rightCircle3.ypos+150)
+            {
+                System.out.println("Click");
+            }
+        }
+        
     }
 }
