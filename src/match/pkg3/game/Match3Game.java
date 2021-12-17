@@ -21,6 +21,8 @@ public class Match3Game extends JFrame implements Runnable {
     Image image;
     Graphics2D g;
     Image Orb;
+    Image Player1;
+    Image Player2;
     Circle leftCircle1;
     Circle leftCircle2;
     Circle leftCircle3;
@@ -146,16 +148,18 @@ public class Match3Game extends JFrame implements Runnable {
         else
             playerTurn = 2;
         
+        Players();
         HealthBar();
         TurnIndicator(); 
         Board.Draw(g,frame);
-        leftCircle1.draw(g,Player.GetPlayer1(),Color.BLUE);
-        leftCircle2.draw(g,Player.GetPlayer1(),Color.RED);
-        leftCircle3.draw(g,Player.GetPlayer1(),Color.GREEN);
-        rightCircle1.draw(g,Player.GetPlayer2(),Color.BLUE);
-        rightCircle2.draw(g,Player.GetPlayer2(),Color.RED);
-        rightCircle3.draw(g,Player.GetPlayer2(),Color.GREEN);
+        leftCircle1.draw(g,Player.GetPlayer2(),Color.BLUE);
+        leftCircle2.draw(g,Player.GetPlayer2(),Color.RED);
+        leftCircle3.draw(g,Player.GetPlayer2(),Color.GREEN);
+        rightCircle1.draw(g,Player.GetPlayer1(),Color.BLUE);
+        rightCircle2.draw(g,Player.GetPlayer1(),Color.RED);
+        rightCircle3.draw(g,Player.GetPlayer1(),Color.GREEN);
         Board.Draw(g,frame);
+        
         
         if (Time < 100)
         {
@@ -168,6 +172,7 @@ public class Match3Game extends JFrame implements Runnable {
             g.drawString("indicators to use that attack. The highlighted buttons on left or right of the ",50,180);
             g.drawString("screen are the current player's attack buttons. Take your time and use your brain. ",50,220);
             g.drawString("This is not on a timer and only one piece or attack can be moved/used per turn.",50,260);
+            g.drawString("Player 1 is the left indicators, and player 2 is the right.",50,300);
         }
         
         gOld.drawImage(image, 0, 0, null);
@@ -222,6 +227,8 @@ public class Match3Game extends JFrame implements Runnable {
             RedCrystal = Toolkit.getDefaultToolkit().getImage("./Red Crystal.PNG");
             BlueCrystal = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
             GreenCrystal = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
+            Player2  = Toolkit.getDefaultToolkit().getImage("./EvardIdle.GIF");
+            Player1  = Toolkit.getDefaultToolkit().getImage("./TerrenIdle.GIF");
             reset();
         }
         
@@ -242,6 +249,11 @@ public class Match3Game extends JFrame implements Runnable {
             relaxer.stop();
         }
         relaxer = null;
+    }
+    public void Players()
+    {
+        g.drawImage(Player1,Window.xsize-425, 170, 853/2, 480/2,this);
+        g.drawImage(Player2,0, 170, 1280/3,720/3,this);  
     }
     
     public void TurnIndicator()
