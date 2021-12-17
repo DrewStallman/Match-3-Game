@@ -21,6 +21,6 @@ public class Circle
         g.drawImage(crystal,xpos+40,ypos+15,75,75,null);
         g.setColor(Color.black);
         g.setFont (new Font ("Arial",Font.TYPE1_FONT, 30));
-//        g.drawString(""+Player.GetPlayer2().getPoints(Color.BLUE), xpos+65, ypos+125);
+        g.drawString(""+Player.GetPlayer2().getPoints(Color.BLUE), xpos+65, ypos+125);
     }
 }

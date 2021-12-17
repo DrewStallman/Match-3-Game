@@ -41,6 +41,8 @@ public class Match3Game extends JFrame implements Runnable {
     Image RedCrystal;
     Image BlueCrystal;
     Image GreenCrystal;
+    Image Player1;
+    Image Player2;
     static ArrayList<Circle> circles = new ArrayList<>();
     static Match3Game frame;
     public static void main(String[] args) {
@@ -147,7 +149,8 @@ public class Match3Game extends JFrame implements Runnable {
             playerTurn = 2;
         
         HealthBar();
-        TurnIndicator(); 
+        TurnIndicator();
+        Players();
         Board.Draw(g,frame);
         leftCircle1.draw(g);
         leftCircle2.draw(g);
@@ -157,18 +160,18 @@ public class Match3Game extends JFrame implements Runnable {
         rightCircle3.draw(g);
         Board.Draw(g,frame);
         
-        if (Time < 100)
-        {
-            g.setColor(Color.WHITE);
-            g.fillRect(0,0,Window.WINDOW_WIDTH,Window.WINDOW_HEIGHT);
-            g.setColor(Color.BLACK);
-            g.setFont (new Font ("Arial",Font.TYPE1_FONT, 40));
-            g.drawString("Hello, this is a match 3 game, match 3 of the same pieces for one point of that ",50,100);
-            g.drawString("piece type. The points for each crystal type max out at 10, click on the point ",50,140);
-            g.drawString("indicators to use that attack. The highlighted buttons on left or right of the ",50,180);
-            g.drawString("screen are the current player's attack buttons. Take your time and use your brain. ",50,220);
-            g.drawString("This is not on a timer and only one piece or attack can be moved/used per turn.",50,260);
-        }
+//        if (Time < 100)
+//        {
+//            g.setColor(Color.WHITE);
+//            g.fillRect(0,0,Window.WINDOW_WIDTH,Window.WINDOW_HEIGHT);
+//            g.setColor(Color.BLACK);
+//            g.setFont (new Font ("Arial",Font.TYPE1_FONT, 40));
+//            g.drawString("Hello, this is a match 3 game, match 3 of the same pieces for one point of that ",50,100);
+//            g.drawString("piece type. The points for each crystal type max out at 10, click on the point ",50,140);
+//            g.drawString("indicators to use that attack. The highlighted buttons on left or right of the ",50,180);
+//            g.drawString("screen are the current player's attack buttons. Take your time and use your brain. ",50,220);
+//            g.drawString("This is not on a timer and only one piece or attack can be moved/used per turn.",50,260);
+//        }
         
         gOld.drawImage(image, 0, 0, null);
     }
@@ -221,6 +224,8 @@ public class Match3Game extends JFrame implements Runnable {
             RedCrystal = Toolkit.getDefaultToolkit().getImage("./Red Crystal.PNG");
             BlueCrystal  = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
             GreenCrystal  = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
+            Player2  = Toolkit.getDefaultToolkit().getImage("./EvardIdle.GIF");
+            Player1  = Toolkit.getDefaultToolkit().getImage("./TerrenIdle.GIF");
             reset();
         }
         
@@ -275,6 +280,11 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawString(health2 + "%", 1350, 80);
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this);
+    }
+    public void Players()
+    {
+     g.drawImage(Player1,Window.xsize-425, 170, 853/2, 480/2,this);
+        g.drawImage(Player2,0, 170, 1280/3,720/3,this);   
     }
     
     public void IndicatorClick(int xpos, int ypos)
