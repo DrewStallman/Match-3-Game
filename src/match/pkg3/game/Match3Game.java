@@ -20,6 +20,7 @@ public class Match3Game extends JFrame implements Runnable {
     int Time;
     Image image;
     Graphics2D g;
+    Image Orb;
     Circle leftCircle1;
     Circle leftCircle2;
     Circle leftCircle3;
@@ -41,8 +42,6 @@ public class Match3Game extends JFrame implements Runnable {
     Image RedCrystal;
     Image BlueCrystal;
     Image GreenCrystal;
-    Image Player1;
-    Image Player2;
     static ArrayList<Circle> circles = new ArrayList<>();
     static Match3Game frame;
     public static void main(String[] args) {
@@ -62,7 +61,6 @@ public class Match3Game extends JFrame implements Runnable {
                     if (Time <= 100)
                         return;
                     Board.SwitchPieces(e.getX(),e.getY(),frame);
-                    //CrystalsHighlighted(e.getX(),e.getY());
                     IndicatorClick(e.getX(),e.getY());
                 }
                 
@@ -149,29 +147,28 @@ public class Match3Game extends JFrame implements Runnable {
             playerTurn = 2;
         
         HealthBar();
-        TurnIndicator();
-        Players();
+        TurnIndicator(); 
         Board.Draw(g,frame);
-        leftCircle1.draw(g);
-        leftCircle2.draw(g);
-        leftCircle3.draw(g);
-        rightCircle1.draw(g);
-        rightCircle2.draw(g);
-        rightCircle3.draw(g);
+        leftCircle1.draw(g,Player.GetPlayer1(),Color.BLUE);
+        leftCircle2.draw(g,Player.GetPlayer1(),Color.RED);
+        leftCircle3.draw(g,Player.GetPlayer1(),Color.GREEN);
+        rightCircle1.draw(g,Player.GetPlayer2(),Color.BLUE);
+        rightCircle2.draw(g,Player.GetPlayer2(),Color.RED);
+        rightCircle3.draw(g,Player.GetPlayer2(),Color.GREEN);
         Board.Draw(g,frame);
         
-//        if (Time < 100)
-//        {
-//            g.setColor(Color.WHITE);
-//            g.fillRect(0,0,Window.WINDOW_WIDTH,Window.WINDOW_HEIGHT);
-//            g.setColor(Color.BLACK);
-//            g.setFont (new Font ("Arial",Font.TYPE1_FONT, 40));
-//            g.drawString("Hello, this is a match 3 game, match 3 of the same pieces for one point of that ",50,100);
-//            g.drawString("piece type. The points for each crystal type max out at 10, click on the point ",50,140);
-//            g.drawString("indicators to use that attack. The highlighted buttons on left or right of the ",50,180);
-//            g.drawString("screen are the current player's attack buttons. Take your time and use your brain. ",50,220);
-//            g.drawString("This is not on a timer and only one piece or attack can be moved/used per turn.",50,260);
-//        }
+        if (Time < 100)
+        {
+            g.setColor(Color.WHITE);
+            g.fillRect(0,0,Window.WINDOW_WIDTH,Window.WINDOW_HEIGHT);
+            g.setColor(Color.BLACK);
+            g.setFont (new Font ("Arial",Font.TYPE1_FONT, 40));
+            g.drawString("Hello, this is a match 3 game, match 3 of the same pieces for one point of that ",50,100);
+            g.drawString("piece type. The points for each crystal type max out at 10, click on the point ",50,140);
+            g.drawString("indicators to use that attack. The highlighted buttons on left or right of the ",50,180);
+            g.drawString("screen are the current player's attack buttons. Take your time and use your brain. ",50,220);
+            g.drawString("This is not on a timer and only one piece or attack can be moved/used per turn.",50,260);
+        }
         
         gOld.drawImage(image, 0, 0, null);
     }
@@ -202,6 +199,7 @@ public class Match3Game extends JFrame implements Runnable {
         rightCircle2 = new Circle(RedCrystal,Circle,Window.xsize-200, 580);
         rightCircle3 = new Circle(GreenCrystal,Circle,Window.xsize-200, 730);
         Time = 0;
+        
     }
 /////////////////////////////////////////////////////////////////////////
     public void animate() {
@@ -222,10 +220,8 @@ public class Match3Game extends JFrame implements Runnable {
             CircleHighlighted = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
             Circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
             RedCrystal = Toolkit.getDefaultToolkit().getImage("./Red Crystal.PNG");
-            BlueCrystal  = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
-            GreenCrystal  = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
-            Player2  = Toolkit.getDefaultToolkit().getImage("./EvardIdle.GIF");
-            Player1  = Toolkit.getDefaultToolkit().getImage("./TerrenIdle.GIF");
+            BlueCrystal = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
+            GreenCrystal = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
             reset();
         }
         
@@ -281,14 +277,40 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this);
     }
-    public void Players()
-    {
-     g.drawImage(Player1,Window.xsize-425, 170, 853/2, 480/2,this);
-        g.drawImage(Player2,0, 170, 1280/3,720/3,this);   
-    }
     
     public void IndicatorClick(int xpos, int ypos)
     {
+        if (Player.GetCurrentTurn() == Player.GetPlayer1())
+        {
+            if (xpos >= leftCircle1.xpos-150 && xpos <= leftCircle1.xpos+150 && ypos >= leftCircle1.ypos-150 && ypos <= leftCircle1.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+            else if (xpos >= leftCircle2.xpos-150 && xpos <= leftCircle2.xpos+150 && ypos >= leftCircle2.ypos-150 && ypos <= leftCircle2.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+            else if (xpos >= leftCircle3.xpos-150 && xpos <= leftCircle3.xpos+150 && ypos >= leftCircle3.ypos-150 && ypos <= leftCircle3.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+        }
+        
+        if (Player.GetCurrentTurn() == Player.GetPlayer2())
+        {
+            if (xpos >= rightCircle1.xpos-150 && xpos <= rightCircle1.xpos+150 && ypos >= rightCircle1.ypos-150 && ypos <= rightCircle1.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+            else if (xpos >= rightCircle2.xpos-150 && xpos <= rightCircle2.xpos+150 && ypos >= rightCircle2.ypos-150 && ypos <= rightCircle2.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+            else if (xpos >= rightCircle3.xpos-150 && xpos <= rightCircle3.xpos+150 && ypos >= rightCircle3.ypos-150 && ypos <= rightCircle3.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+        }
         if (Player.GetCurrentTurn() == Player.GetPlayer1())
         {
             leftCircle1.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
@@ -307,37 +329,5 @@ public class Match3Game extends JFrame implements Runnable {
             leftCircle2.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
             leftCircle3.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
         }
-        if (Player.GetCurrentTurn() == Player.GetPlayer1())
-        {
-            if (xpos >= leftCircle1.xpos-150 && xpos <= leftCircle1.xpos+150 && ypos >= leftCircle1.ypos-150 && ypos <= leftCircle1.ypos+150)
-            {
-                System.out.println("Click");
-            }
-            else if (xpos >= leftCircle2.xpos-150 && xpos <= leftCircle2.xpos+150 && ypos >= leftCircle2.ypos-150 && ypos <= leftCircle2.ypos+150)
-            {
-                System.out.println("Click");
-            }
-            else if (xpos >= leftCircle3.xpos-150 && xpos <= leftCircle3.xpos+150 && ypos >= leftCircle3.ypos-150 && ypos <= leftCircle3.ypos+150)
-            {
-                System.out.println("Click");
-            }
-        }
-        
-        if (Player.GetCurrentTurn() == Player.GetPlayer2())
-        {
-            if (xpos >= rightCircle1.xpos-150 && xpos <= rightCircle1.xpos+150 && ypos >= rightCircle1.ypos-150 && ypos <= rightCircle1.ypos+150)
-            {
-                System.out.println("Click");
-            }
-            else if (xpos >= rightCircle2.xpos-150 && xpos <= rightCircle2.xpos+150 && ypos >= rightCircle2.ypos-150 && ypos <= rightCircle2.ypos+150)
-            {
-                System.out.println("Click");
-            }
-            else if (xpos >= rightCircle3.xpos-150 && xpos <= rightCircle3.xpos+150 && ypos >= rightCircle3.ypos-150 && ypos <= rightCircle3.ypos+150)
-            {
-                System.out.println("Click");
-            }
-        }
-   
     }
 }
