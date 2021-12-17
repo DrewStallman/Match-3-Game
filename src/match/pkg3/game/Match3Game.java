@@ -20,6 +20,7 @@ public class Match3Game extends JFrame implements Runnable {
     int Time;
     Image image;
     Graphics2D g;
+    Image Orb;
     Circle leftCircle1;
     Circle leftCircle2;
     Circle leftCircle3;
@@ -60,7 +61,6 @@ public class Match3Game extends JFrame implements Runnable {
                     if (Time <= 100)
                         return;
                     Board.SwitchPieces(e.getX(),e.getY(),frame);
-                    //CrystalsHighlighted(e.getX(),e.getY());
                     IndicatorClick(e.getX(),e.getY());
                 }
                 
@@ -149,12 +149,12 @@ public class Match3Game extends JFrame implements Runnable {
         HealthBar();
         TurnIndicator(); 
         Board.Draw(g,frame);
-        leftCircle1.draw(g);
-        leftCircle2.draw(g);
-        leftCircle3.draw(g);
-        rightCircle1.draw(g);
-        rightCircle2.draw(g);
-        rightCircle3.draw(g);
+        leftCircle1.draw(g,Player.GetPlayer1(),Color.BLUE);
+        leftCircle2.draw(g,Player.GetPlayer1(),Color.RED);
+        leftCircle3.draw(g,Player.GetPlayer1(),Color.GREEN);
+        rightCircle1.draw(g,Player.GetPlayer2(),Color.BLUE);
+        rightCircle2.draw(g,Player.GetPlayer2(),Color.RED);
+        rightCircle3.draw(g,Player.GetPlayer2(),Color.GREEN);
         Board.Draw(g,frame);
         
         if (Time < 100)
@@ -199,6 +199,7 @@ public class Match3Game extends JFrame implements Runnable {
         rightCircle2 = new Circle(RedCrystal,Circle,Window.xsize-200, 580);
         rightCircle3 = new Circle(GreenCrystal,Circle,Window.xsize-200, 730);
         Time = 0;
+        
     }
 /////////////////////////////////////////////////////////////////////////
     public void animate() {
@@ -219,8 +220,8 @@ public class Match3Game extends JFrame implements Runnable {
             CircleHighlighted = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
             Circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
             RedCrystal = Toolkit.getDefaultToolkit().getImage("./Red Crystal.PNG");
-            BlueCrystal  = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
-            GreenCrystal  = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
+            BlueCrystal = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
+            GreenCrystal = Toolkit.getDefaultToolkit().getImage("./Green Crystal.PNG");
             reset();
         }
         
@@ -281,6 +282,37 @@ public class Match3Game extends JFrame implements Runnable {
     {
         if (Player.GetCurrentTurn() == Player.GetPlayer1())
         {
+            if (xpos >= leftCircle1.xpos-150 && xpos <= leftCircle1.xpos+150 && ypos >= leftCircle1.ypos-150 && ypos <= leftCircle1.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+            else if (xpos >= leftCircle2.xpos-150 && xpos <= leftCircle2.xpos+150 && ypos >= leftCircle2.ypos-150 && ypos <= leftCircle2.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+            else if (xpos >= leftCircle3.xpos-150 && xpos <= leftCircle3.xpos+150 && ypos >= leftCircle3.ypos-150 && ypos <= leftCircle3.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+        }
+        
+        if (Player.GetCurrentTurn() == Player.GetPlayer2())
+        {
+            if (xpos >= rightCircle1.xpos-150 && xpos <= rightCircle1.xpos+150 && ypos >= rightCircle1.ypos-150 && ypos <= rightCircle1.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+            else if (xpos >= rightCircle2.xpos-150 && xpos <= rightCircle2.xpos+150 && ypos >= rightCircle2.ypos-150 && ypos <= rightCircle2.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+            else if (xpos >= rightCircle3.xpos-150 && xpos <= rightCircle3.xpos+150 && ypos >= rightCircle3.ypos-150 && ypos <= rightCircle3.ypos+150)
+            {
+                Player.SwitchTurn();
+            }
+        }
+        if (Player.GetCurrentTurn() == Player.GetPlayer1())
+        {
             leftCircle1.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
             leftCircle2.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
             leftCircle3.circle = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
@@ -297,37 +329,5 @@ public class Match3Game extends JFrame implements Runnable {
             leftCircle2.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
             leftCircle3.circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
         }
-        if (Player.GetCurrentTurn() == Player.GetPlayer1())
-        {
-            if (xpos >= leftCircle1.xpos-150 && xpos <= leftCircle1.xpos+150 && ypos >= leftCircle1.ypos-150 && ypos <= leftCircle1.ypos+150)
-            {
-                System.out.println("Click");
-            }
-            else if (xpos >= leftCircle2.xpos-150 && xpos <= leftCircle2.xpos+150 && ypos >= leftCircle2.ypos-150 && ypos <= leftCircle2.ypos+150)
-            {
-                System.out.println("Click");
-            }
-            else if (xpos >= leftCircle3.xpos-150 && xpos <= leftCircle3.xpos+150 && ypos >= leftCircle3.ypos-150 && ypos <= leftCircle3.ypos+150)
-            {
-                System.out.println("Click");
-            }
-        }
-        
-        if (Player.GetCurrentTurn() == Player.GetPlayer2())
-        {
-            if (xpos >= rightCircle1.xpos-150 && xpos <= rightCircle1.xpos+150 && ypos >= rightCircle1.ypos-150 && ypos <= rightCircle1.ypos+150)
-            {
-                System.out.println("Click");
-            }
-            else if (xpos >= rightCircle2.xpos-150 && xpos <= rightCircle2.xpos+150 && ypos >= rightCircle2.ypos-150 && ypos <= rightCircle2.ypos+150)
-            {
-                System.out.println("Click");
-            }
-            else if (xpos >= rightCircle3.xpos-150 && xpos <= rightCircle3.xpos+150 && ypos >= rightCircle3.ypos-150 && ypos <= rightCircle3.ypos+150)
-            {
-                System.out.println("Click");
-            }
-        }
-   
     }
 }
