@@ -265,12 +265,16 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawString("" + playerTurn, 780, 161);
         g.drawImage(BoardOutline,282, 400, 1039, 500,this);
     }
-    public void Damage()
+    public void Damage(int value)
     {
-        health1 -= damage1;
-        health2 -= damage2;
-        damageAdd1 = damage1*5;
-        damageAdd2 = damage2*5;
+        if (Player.GetCurrentTurn() == Player.GetPlayer1())
+        {
+            health2 -= value;
+        }
+        else 
+        {
+            health1 -= value;
+        }
     }
     public void HealthBar()
     {
@@ -294,32 +298,44 @@ public class Match3Game extends JFrame implements Runnable {
     {
         if (Player.GetCurrentTurn() == Player.GetPlayer1())
         {
-            if (xpos >= leftCircle1.xpos-150 && xpos <= leftCircle1.xpos+150 && ypos >= leftCircle1.ypos-150 && ypos <= leftCircle1.ypos+150)
+            if (xpos >= leftCircle1.xpos-150 && xpos <= leftCircle1.xpos+150 && ypos >= leftCircle1.ypos-150 && ypos <= leftCircle1.ypos+150 && Player.GetPlayer2().getPoints(Color.BLUE) >= 3)
             {
+                Damage(Player.GetPlayer2().getPoints(Color.BLUE));
+                Player.GetPlayer2().set0(Color.BLUE);
                 Player.SwitchTurn();
             }
-            else if (xpos >= leftCircle2.xpos-150 && xpos <= leftCircle2.xpos+150 && ypos >= leftCircle2.ypos-150 && ypos <= leftCircle2.ypos+150)
+            else if (xpos >= leftCircle2.xpos-150 && xpos <= leftCircle2.xpos+150 && ypos >= leftCircle2.ypos-150 && ypos <= leftCircle2.ypos+150 && Player.GetPlayer2().getPoints(Color.RED) >= 3)
             {
+                Damage(Player.GetPlayer2().getPoints(Color.RED));
+                Player.GetPlayer2().set0(Color.RED);
                 Player.SwitchTurn();
             }
-            else if (xpos >= leftCircle3.xpos-150 && xpos <= leftCircle3.xpos+150 && ypos >= leftCircle3.ypos-150 && ypos <= leftCircle3.ypos+150)
+            else if (xpos >= leftCircle3.xpos-150 && xpos <= leftCircle3.xpos+150 && ypos >= leftCircle3.ypos-150 && ypos <= leftCircle3.ypos+150 && Player.GetPlayer2().getPoints(Color.GREEN) >= 3)
             {
+                Damage(Player.GetPlayer2().getPoints(Color.GREEN));
+                Player.GetPlayer2().set0(Color.GREEN);
                 Player.SwitchTurn();
             }
         }
         
         if (Player.GetCurrentTurn() == Player.GetPlayer2())
         {
-            if (xpos >= rightCircle1.xpos-150 && xpos <= rightCircle1.xpos+150 && ypos >= rightCircle1.ypos-150 && ypos <= rightCircle1.ypos+150)
+            if (xpos >= rightCircle1.xpos-150 && xpos <= rightCircle1.xpos+150 && ypos >= rightCircle1.ypos-150 && ypos <= rightCircle1.ypos+150 && Player.GetPlayer1().getPoints(Color.BLUE) >= 3)
             {
+                Damage(Player.GetPlayer1().getPoints(Color.BLUE));
+                Player.GetPlayer1().set0(Color.BLUE);
                 Player.SwitchTurn();
             }
-            else if (xpos >= rightCircle2.xpos-150 && xpos <= rightCircle2.xpos+150 && ypos >= rightCircle2.ypos-150 && ypos <= rightCircle2.ypos+150)
+            else if (xpos >= rightCircle2.xpos-150 && xpos <= rightCircle2.xpos+150 && ypos >= rightCircle2.ypos-150 && ypos <= rightCircle2.ypos+150 && Player.GetPlayer1().getPoints(Color.RED) >= 3)
             {
+                Damage(Player.GetPlayer1().getPoints(Color.RED));
+                Player.GetPlayer1().set0(Color.RED);
                 Player.SwitchTurn();
             }
-            else if (xpos >= rightCircle3.xpos-150 && xpos <= rightCircle3.xpos+150 && ypos >= rightCircle3.ypos-150 && ypos <= rightCircle3.ypos+150)
+            else if (xpos >= rightCircle3.xpos-150 && xpos <= rightCircle3.xpos+150 && ypos >= rightCircle3.ypos-150 && ypos <= rightCircle3.ypos+150 && Player.GetPlayer1().getPoints(Color.GREEN) >= 3)
             {
+                Damage(Player.GetPlayer1().getPoints(Color.GREEN));
+                Player.GetPlayer1().set0(Color.GREEN);
                 Player.SwitchTurn();
             }
         }

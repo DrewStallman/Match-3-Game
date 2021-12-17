@@ -65,6 +65,21 @@ public class Player
         }
         return 0;
     }
+    public void set0(Color color)
+    {
+        if (color == Color.BLUE)
+        {
+            bluePoints = 0;
+        }
+        else if (color == Color.RED)
+        {
+            redPoints = 0;
+        }
+        else if (color == Color.GREEN)
+        {
+            greenPoints = 0;
+        }
+    }
     public void changePoints(Color color,int value)
     {
         if (color == Color.BLUE)
