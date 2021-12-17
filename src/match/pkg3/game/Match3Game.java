@@ -60,7 +60,8 @@ public class Match3Game extends JFrame implements Runnable {
                     if (Time <= 100)
                         return;
                     Board.SwitchPieces(e.getX(),e.getY(),frame);
-                    CrystalsHighlighted(e.getX(),e.getY());
+                    //CrystalsHighlighted(e.getX(),e.getY());
+                    IndicatorClick(e.getX(),e.getY());
                 }
                 
                 if (e.BUTTON3 == e.getButton()) {
@@ -147,7 +148,6 @@ public class Match3Game extends JFrame implements Runnable {
         
         HealthBar();
         TurnIndicator(); 
-        Crystals();
         Board.Draw(g,frame);
         leftCircle1.draw(g);
         leftCircle2.draw(g);
@@ -216,6 +216,7 @@ public class Match3Game extends JFrame implements Runnable {
             MiddlePiece = Toolkit.getDefaultToolkit().getImage("./MiddlePiece.PNG");
             PlayerBar = Toolkit.getDefaultToolkit().getImage("./PlayerTurn.PNG");
             BoardOutline = Toolkit.getDefaultToolkit().getImage("./BoardOutline.PNG");
+            CircleHighlighted = Toolkit.getDefaultToolkit().getImage("./CircleHighlighted.PNG");
             Circle = Toolkit.getDefaultToolkit().getImage("./Circle.PNG");
             RedCrystal = Toolkit.getDefaultToolkit().getImage("./Red Crystal.PNG");
             BlueCrystal  = Toolkit.getDefaultToolkit().getImage("./Blue Crystal.PNG");
@@ -275,67 +276,7 @@ public class Match3Game extends JFrame implements Runnable {
         g.drawImage(HealthBar1P2,1066, 30, Window.xsize/3, Window.ysize/13,this);
         g.drawImage(HealthBar2P2,0, 30, Window.xsize/3, Window.ysize/13,this);
     }
-
     
-    public void CrystalsHighlighted(int xpos, int ypos)
-    {
-        //do not change numbers
-        if (xpos > 130 - 65 &&
-        xpos < 130 + 65 &&
-        ypos > 650 - 65 &&
-        ypos < 650 + 65 && Player.GetPlayer1().getPoints(Color.BLUE) >= 3)
-                        g.drawImage(CircleHighlighted,50, 580, 150, 150,this);//blue1
-                    else if (xpos > Window.xsize-145 - 65 &&
-        xpos < Window.xsize-145 + 65 &&
-        ypos > 650 - 65 &&
-        ypos < 650 + 65 && Player.GetPlayer2().getPoints(Color.BLUE) >= 3)
-                       g.drawImage(CircleHighlighted,Window.xsize-200, 580, 150, 150,this);//blue2 
-                    else if (xpos > 130 - 65 &&
-        xpos < 130 + 65 &&
-        ypos > 800 - 65 &&
-        ypos < 800 + 65 && Player.GetPlayer1().getPoints(Color.RED) >= 3)
-                        g.drawImage(CircleHighlighted,50, 730, 150, 150,this);//red1
-                    else if (xpos > Window.xsize-145 - 65 &&
-        xpos < Window.xsize-145 + 65 &&
-        ypos > 800 - 65 &&
-        ypos < 800 + 65 && Player.GetPlayer2().getPoints(Color.RED) >= 3)
-                       g.drawImage(CircleHighlighted,Window.xsize-200, 730, 150, 150,this);//red2
-                    else if (xpos > 130 - 65 &&
-        xpos < 130 + 65 &&
-        ypos > 500 - 65 &&
-        ypos < 500 + 65 && Player.GetPlayer1().getPoints(Color.GREEN) >= 3)
-                        g.drawImage(CircleHighlighted,50, 430, 150, 150,this);//green1
-                    else if (xpos > Window.xsize-145 - 65 &&
-        xpos < Window.xsize-145 + 65 &&
-        ypos > 500 - 65 &&
-        ypos < 500 + 65 && Player.GetPlayer2().getPoints(Color.GREEN) >= 3)
-                      g.drawImage(CircleHighlighted,Window.xsize-200, 430, 150, 150,this);//green2
-    }
-    
-    public void Crystals()
-    {
-                    
-        g.drawImage(Circle,50, 430, 150, 150,this);
-        g.drawImage(Circle,50, 580, 150, 150,this);
-        g.drawImage(Circle,50, 730, 150, 150,this);
-        g.drawImage(Circle,Window.xsize-200, 430, 150, 150,this);
-        g.drawImage(Circle,Window.xsize-200, 580, 150, 150,this);      
-        g.drawImage(Circle,Window.xsize-200, 730, 150, 150,this);
-        g.drawImage(RedCrystal,Window.xsize-165, 740, 75, 75,this);
-        g.drawImage(BlueCrystal,Window.xsize-165, 590, 75, 75,this);
-        g.drawImage(GreenCrystal,Window.xsize-165, 440, 75, 75,this);
-        g.drawImage(RedCrystal,85, 740, 75, 75,this);
-        g.drawImage(BlueCrystal,85, 590, 75, 75,this);
-        g.drawImage(GreenCrystal,85, 440, 75, 75,this);        
-        g.setColor(Color.black);
-        g.setFont (new Font ("Arial",Font.TYPE1_FONT, 30));
-        g.drawString(""+Player.GetPlayer2().getPoints(Color.BLUE), 104, 705);
-        g.drawString(""+Player.GetPlayer1().getPoints(Color.BLUE), Window.xsize-145, 705);
-        g.drawString(""+Player.GetPlayer2().getPoints(Color.RED), 104, 855);
-        g.drawString(""+Player.GetPlayer1().getPoints(Color.RED), Window.xsize-145, 855);
-        g.drawString(""+Player.GetPlayer2().getPoints(Color.GREEN), 104, 555);
-        g.drawString(""+Player.GetPlayer1().getPoints(Color.GREEN), Window.xsize-145, 555);
-    }
     public void IndicatorClick(int xpos, int ypos)
     {
         if (Player.GetCurrentTurn() == Player.GetPlayer1())
@@ -387,6 +328,6 @@ public class Match3Game extends JFrame implements Runnable {
                 System.out.println("Click");
             }
         }
-        
+   
     }
 }
