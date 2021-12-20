@@ -172,7 +172,6 @@ public class Board
                    }
                    redCount = 0;
                }
-
             }
             blueCount = 0;
             greenCount = 0;
@@ -324,9 +323,9 @@ public class Board
 
             g.setColor(Color.white);
             if (frame.health1 <= 0)
-                StringCentered(g,500,554,"Player 1 is the Winner","Arial",100);
-            else if (frame.health2 <= 0)
                 StringCentered(g,500,554,"Player 2 is the Winner","Arial",100);
+            else if (frame.health2 <= 0)
+                StringCentered(g,500,554,"Player 1 is the Winner","Arial",100);
         
     }
     
